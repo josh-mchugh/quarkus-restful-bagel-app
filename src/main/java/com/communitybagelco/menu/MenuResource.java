@@ -1,4 +1,4 @@
-package com.communitybagelco;
+package com.communitybagelco.menu;
 
 import java.util.List;
 
@@ -15,6 +15,10 @@ public class MenuResource {
     @GET
     public Response getMenu() {
 
-        return Response.ok(List.of()).build();
+        List<Menu.Item> items = List.of(
+            new Menu.Item("Plain", "General plain bagel")
+        );
+
+        return Response.ok(new Menu(items)).build();
     }
 }

@@ -1,4 +1,4 @@
-package com.communitybagelco;
+package com.communitybagelco.menu;
 
 import javax.ws.rs.core.Response;
 
@@ -8,8 +8,6 @@ import io.quarkus.test.junit.QuarkusTest;
 
 import static org.hamcrest.CoreMatchers.is;
 import static io.restassured.RestAssured.given;
-
-import java.util.List;
 
 @QuarkusTest
 public class MenuResourceTest {
@@ -26,10 +24,11 @@ public class MenuResourceTest {
 
     @Test
     public void whenMenuRequestIsValidThenExpectBody() {
-    
+
         given()
             .when().get("/api/menu")
             .then()
-                .body("$", is(List.of()));    
+                .body("items[0].name", is("Plain"))
+                .body("items[0].description", is("General plain bagel"));    
     }
 }
