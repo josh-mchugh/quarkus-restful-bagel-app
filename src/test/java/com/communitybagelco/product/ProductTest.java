@@ -1,14 +1,14 @@
-package com.communitybagelco.inventory;
+package com.communitybagelco.product;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-public class InventoryTest {
+public class ProductTest {
     
     @Test
     public void whenInventoryHasNameThenExpectName() {
 
-        Inventory inventory = new Inventory();
+        Product inventory = new Product();
         inventory.setName("name");
 
         Assertions.assertEquals("name", inventory.getName());
@@ -17,7 +17,7 @@ public class InventoryTest {
     @Test
     public void whenInventoryHasDescriptionThenExpectDescription() {
 
-        Inventory inventory = new Inventory();
+        Product inventory = new Product();
         inventory.setDescription("description");
 
         Assertions.assertEquals("description", inventory.getDescription());

@@ -1,6 +1,6 @@
-package com.communitybagelco.inventory;
+package com.communitybagelco.product;
 
-public class Inventory {
+public class Product {
     
     private String name;
     private String description;
