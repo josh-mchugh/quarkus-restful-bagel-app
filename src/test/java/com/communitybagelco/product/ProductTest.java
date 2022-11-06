@@ -3,23 +3,36 @@ package com.communitybagelco.product;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import com.communitybagelco.category.Category;
+
 public class ProductTest {
     
     @Test
-    public void whenInventoryHasNameThenExpectName() {
+    public void whenProductHasNameThenExpectName() {
 
-        Product inventory = new Product();
-        inventory.setName("name");
+        Product product = new Product();
+        product.setName("name");
 
-        Assertions.assertEquals("name", inventory.getName());
+        Assertions.assertEquals("name", product.getName());
     }
 
     @Test
-    public void whenInventoryHasDescriptionThenExpectDescription() {
+    public void whenProductHasDescriptionThenExpectDescription() {
 
-        Product inventory = new Product();
-        inventory.setDescription("description");
+        Product product = new Product();
+        product.setDescription("description");
 
-        Assertions.assertEquals("description", inventory.getDescription());
+        Assertions.assertEquals("description", product.getDescription());
+    }
+
+    @Test
+    public void whenProductHasCategoryThenExpectCategory() {
+
+        Category category = new Category();
+
+        Product product = new Product();
+        product.setCategory(category);
+
+        Assertions.assertEquals(category, product.getCategory());
     }
 }
