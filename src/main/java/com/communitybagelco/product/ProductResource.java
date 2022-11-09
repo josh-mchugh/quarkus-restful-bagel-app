@@ -6,15 +6,14 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import lombok.RequiredArgsConstructor;
+
 @Path("/api/product")
 @Produces(MediaType.APPLICATION_JSON)
+@RequiredArgsConstructor
 public class ProductResource {
 
     private final ProductService service;
-
-    public ProductResource(ProductService service) {
-        this.service = service;
-    }
 
     @GET
     public Response getProducts() {
