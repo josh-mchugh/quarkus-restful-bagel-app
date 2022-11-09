@@ -21,7 +21,7 @@ public class OrderTest {
     @Test
     public void whenOrderHasProductsThenExpectProducts() {
 
-        List<Product> products = List.of(new Product());
+        List<Product> products = List.of(Product.builder().build());
 
         Order order = new Order();
         order.setProducts(products);

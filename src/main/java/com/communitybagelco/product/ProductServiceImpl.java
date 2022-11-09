@@ -8,10 +8,10 @@ import javax.enterprise.context.ApplicationScoped;
 public class ProductServiceImpl implements ProductService {
     
     private static final List<Product> PRODUCTS = List.of(
-        new Product().setName("Plain"),
-        new Product().setName("Everything"),
-        new Product().setName("Poppy"),
-        new Product().setName("Onion")
+        Product.builder().name("Plain").build(),
+        Product.builder().name("Everything").build(),
+        Product.builder().name("Poppy").build(),
+        Product.builder().name("Onion").build()
     );
 
     @Override

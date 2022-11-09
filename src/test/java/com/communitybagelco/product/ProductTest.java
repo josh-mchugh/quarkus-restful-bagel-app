@@ -10,17 +10,18 @@ public class ProductTest {
     @Test
     public void whenProductHasNameThenExpectName() {
 
-        Product product = new Product();
-        product.setName("name");
-
+        Product product = Product.builder()
+            .name("name")
+            .build();
         Assertions.assertEquals("name", product.getName());
     }
 
     @Test
     public void whenProductHasDescriptionThenExpectDescription() {
 
-        Product product = new Product();
-        product.setDescription("description");
+        Product product = Product.builder()
+            .description("description")
+            .build();
 
         Assertions.assertEquals("description", product.getDescription());
     }
@@ -30,8 +31,9 @@ public class ProductTest {
 
         Category category = new Category();
 
-        Product product = new Product();
-        product.setCategory(category);
+        Product product = Product.builder()
+            .category(category)
+            .build();
 
         Assertions.assertEquals(category, product.getCategory());
     }
