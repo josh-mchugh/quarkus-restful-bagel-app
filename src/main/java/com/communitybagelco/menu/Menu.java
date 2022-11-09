@@ -1,39 +1,24 @@
 package com.communitybagelco.menu;
 
+import java.util.ArrayList;
 import java.util.List;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.Value;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
 public class Menu {
     
-    private List<Item> items;
+    private List<Item> items = new ArrayList<>();
 
-    public Menu() {
-        this.items = List.of();
-    }
-
-    public Menu(List<Item> items) {
-        this.items = items;
-    }
-
-    public List<Item> getItems() {
-        return items;
-    }
-
+    @Value
     public static class Item {
 
-        private String name;
-        private String description;
-
-        public Item(String name, String description) {
-            this.name = name;
-            this.description = description;
-        }
-
-        public String getName() {
-            return name;
-        }
-
-        public String getDescription() {
-            return description;
-        }
+        String name;
+        String description;
     }
 }
