@@ -4,9 +4,11 @@ import java.util.List;
 
 import com.communitybagelco.product.Product;
 
+import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.Data;
 
 @Data
+@RegisterForReflection
 public class Order {
     
     private Integer id;
