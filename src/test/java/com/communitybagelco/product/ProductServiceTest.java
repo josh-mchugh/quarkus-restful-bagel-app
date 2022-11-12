@@ -11,10 +11,10 @@ public class ProductServiceTest {
     public void whenGetAllThenExpectList() {
 
         List<Product> expected = List.of(
-            Product.builder().id(1).name("Plain").build(),
-            Product.builder().id(2).name("Everything").build(),
-            Product.builder().id(3).name("Poppy").build(),
-            Product.builder().id(4).name("Onion").build()
+            Product.builder().id(1).name("Plain").price(1.75D).build(),
+            Product.builder().id(2).name("Everything").price(1.75D).build(),
+            Product.builder().id(3).name("Poppy").price(1.75D).build(),
+            Product.builder().id(4).name("Onion").price(1.75D).build()
         );
 
         ProductService service = new ProductServiceImpl();
@@ -26,8 +26,8 @@ public class ProductServiceTest {
     public void whenGetByIdsThenExpectList() {
 
         List<Product> expected = List.of(
-            Product.builder().id(1).name("Plain").build(),
-            Product.builder().id(2).name("Everything").build()
+            Product.builder().id(1).name("Plain").price(1.75D).build(),
+            Product.builder().id(2).name("Everything").price(1.75D).build()
         );
 
         ProductService service = new ProductServiceImpl();

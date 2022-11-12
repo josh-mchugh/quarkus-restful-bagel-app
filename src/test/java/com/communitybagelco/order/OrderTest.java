@@ -28,4 +28,13 @@ public class OrderTest {
 
         Assertions.assertEquals(products, order.getProducts());
     }
+
+    @Test
+    public void whenOrderHasTotalThenExpectTotal() {
+
+        Order order = new Order();
+        order.setTotal(2.5D);
+
+        Assertions.assertEquals(2.5D, order.getTotal());
+    }
 }

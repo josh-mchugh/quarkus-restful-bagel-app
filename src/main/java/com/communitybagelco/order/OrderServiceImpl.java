@@ -2,6 +2,7 @@ package com.communitybagelco.order;
 
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
+import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 
@@ -27,7 +28,10 @@ public class OrderServiceImpl implements OrderService {
         if(request != null && request.getProductIds() != null) {
      
             List<Product> products = productService.getByIds(request.getProductIds());
+            Double total = products.stream().collect(Collectors.summingDouble(Product::getPrice));
+
             order.setProducts(products);
+            order.setTotal(total);
         }
         
         return order;

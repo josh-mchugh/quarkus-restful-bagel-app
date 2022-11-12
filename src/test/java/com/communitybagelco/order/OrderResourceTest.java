@@ -2,14 +2,16 @@ package com.communitybagelco.order;
 
 import javax.ws.rs.core.Response;
 
-import org.hamcrest.CoreMatchers;
-import org.hamcrest.Matchers;
 import org.junit.jupiter.api.Test;
 
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
+
+import static org.hamcrest.CoreMatchers.is;
+import static org.hamcrest.CoreMatchers.notNullValue;
+import static org.hamcrest.Matchers.greaterThan;
 
 import java.util.List;
 
@@ -55,10 +57,10 @@ public class OrderResourceTest {
     }
 
     @Test
-    public void whenOrderHasValidProductsThenExpectId() {
+    public void whenOrderHasValidProductsThenExpectBody() {
 
         OrderRequest request = new OrderRequest();
-        request.setProductIds(List.of(1));
+        request.setProductIds(List.of(1, 2));
 
         given()
             .when()
@@ -66,8 +68,12 @@ public class OrderResourceTest {
                 .body(request)
                 .post("/api/order")
             .then()
-                .body("id", CoreMatchers.notNullValue())
-                .body("id", Matchers.greaterThan(0));
-            
+                .body("id", notNullValue())
+                .body("id", greaterThan(0))
+                .body("products[0].name", is("Plain"))
+                .body("products[0].price", is(1.75F))
+                .body("products[1].name", is("Everything"))
+                .body("products[1].price", is(1.75F))
+                .body("total", is(3.5F));
     }
 }

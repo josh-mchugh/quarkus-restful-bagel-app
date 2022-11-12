@@ -38,6 +38,16 @@ public class ProductTest {
     }
 
     @Test
+    public void whenProductHasPriceThenExpectPrice() {
+
+        Product product = Product.builder()
+        .price(1.75D)
+            .build();
+
+            Assertions.assertEquals(1.75D, product.getPrice());
+    }
+
+    @Test
     public void whenProductHasCategoryThenExpectCategory() {
 
         Category category = new Category();

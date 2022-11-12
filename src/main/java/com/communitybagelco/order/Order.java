@@ -13,4 +13,5 @@ public class Order {
     
     private Integer id;
     private List<Product> products;
+    private Double total;
 }
