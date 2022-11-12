@@ -11,14 +11,27 @@ public class ProductServiceTest {
     public void whenGetAllThenExpectList() {
 
         List<Product> expected = List.of(
-            Product.builder().name("Plain").build(),
-            Product.builder().name("Everything").build(),
-            Product.builder().name("Poppy").build(),
-            Product.builder().name("Onion").build()
+            Product.builder().id(1).name("Plain").build(),
+            Product.builder().id(2).name("Everything").build(),
+            Product.builder().id(3).name("Poppy").build(),
+            Product.builder().id(4).name("Onion").build()
         );
 
         ProductService service = new ProductServiceImpl();
 
         Assertions.assertIterableEquals(expected, service.getAll());
+    }
+
+    @Test
+    public void whenGetByIdsThenExpectList() {
+
+        List<Product> expected = List.of(
+            Product.builder().id(1).name("Plain").build(),
+            Product.builder().id(2).name("Everything").build()
+        );
+
+        ProductService service = new ProductServiceImpl();
+
+        Assertions.assertEquals(expected, service.getByIds(List.of(1, 2)));
     }
 }

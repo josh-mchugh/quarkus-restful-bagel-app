@@ -8,11 +8,22 @@ import com.communitybagelco.category.Category;
 public class ProductTest {
     
     @Test
+    public void whenProductHasIdThenExpectId() {
+
+        Product product = Product.builder()
+            .id(1)
+            .build();
+
+        Assertions.assertEquals(1, product.getId());
+    }
+
+    @Test
     public void whenProductHasNameThenExpectName() {
 
         Product product = Product.builder()
             .name("name")
             .build();
+            
         Assertions.assertEquals("name", product.getName());
     }
 
