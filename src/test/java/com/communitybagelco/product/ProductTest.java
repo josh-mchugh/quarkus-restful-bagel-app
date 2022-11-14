@@ -50,7 +50,7 @@ public class ProductTest {
     @Test
     public void whenProductHasCategoryThenExpectCategory() {
 
-        Category category = new Category();
+        Category category = new Category("test");
 
         Product product = Product.builder()
             .category(category)

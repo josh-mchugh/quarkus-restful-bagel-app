@@ -8,8 +8,7 @@ public class CategoryTest {
     @Test
     public void whenCategoryHasNameThenExpectName() {
 
-        Category category = new Category();
-        category.setName("name");
+        Category category = new Category("name");
 
         Assertions.assertEquals("name", category.getName());
     }
