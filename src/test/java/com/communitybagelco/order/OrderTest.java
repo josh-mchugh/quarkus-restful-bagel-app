@@ -1,5 +1,6 @@
 package com.communitybagelco.order;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
@@ -21,7 +22,7 @@ public class OrderTest {
     @Test
     public void whenOrderHasProductsThenExpectProducts() {
 
-        List<Product> products = List.of(Product.builder().build());
+        List<Product> products = List.of(new Product());
 
         Order order = new Order();
         order.setProducts(products);
@@ -33,8 +34,8 @@ public class OrderTest {
     public void whenOrderHasTotalThenExpectTotal() {
 
         Order order = new Order();
-        order.setTotal(2.5D);
+        order.setTotal(new BigDecimal("2.5"));
 
-        Assertions.assertEquals(2.5D, order.getTotal());
+        Assertions.assertEquals(new BigDecimal("2.5"), order.getTotal());
     }
 }

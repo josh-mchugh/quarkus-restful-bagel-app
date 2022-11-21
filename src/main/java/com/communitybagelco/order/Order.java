@@ -1,5 +1,6 @@
 package com.communitybagelco.order;
 
+import java.math.BigDecimal;
 import java.util.List;
 
 import com.communitybagelco.product.Product;
@@ -13,5 +14,5 @@ public class Order {
     
     private Integer id;
     private List<Product> products;
-    private Double total;
+    private BigDecimal total;
 }

@@ -1,5 +1,6 @@
 package com.communitybagelco.product;
 
+import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
@@ -12,12 +13,37 @@ public class ProductServiceImpl implements ProductService {
     
     private static final Category BAGEL_CATEGORY = new Category("Bagels");
 
-    private static final List<Product> PRODUCTS = List.of(
-        Product.builder().id(1).name("Plain").price(1.75D).category(BAGEL_CATEGORY).build(),
-        Product.builder().id(2).name("Everything").price(1.75D).category(BAGEL_CATEGORY).build(),
-        Product.builder().id(3).name("Poppy").price(1.75D).category(BAGEL_CATEGORY).build(),
-        Product.builder().id(4).name("Onion").price(1.75D).category(BAGEL_CATEGORY).build()
-    );
+    private final List<Product> PRODUCTS;
+
+    public ProductServiceImpl() {
+
+        Product plain = new Product();
+        plain.setId(1);
+        plain.setName("Plain");
+        plain.setPrice(new BigDecimal("1.75"));
+
+        Product everything = new Product();
+        everything.setId(2);
+        everything.setName("Everything");
+        everything.setPrice(new BigDecimal("1.75"));
+
+        Product poppy = new Product();
+        poppy.setId(3);
+        poppy.setName("Poppy");
+        poppy.setPrice(new BigDecimal("1.75"));
+
+        Product onion = new Product();
+        onion.setId(4);
+        onion.setName("Onion");
+        onion.setPrice(new BigDecimal("1.75"));
+
+        PRODUCTS = List.of(
+            plain,
+            everything,
+            poppy,
+            onion
+        );
+    }
 
     @Override
     public List<Product> getAll() {

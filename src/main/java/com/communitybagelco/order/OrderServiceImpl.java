@@ -1,5 +1,6 @@
 package com.communitybagelco.order;
 
+import java.math.BigDecimal;
 import java.util.List;
 import java.util.concurrent.atomic.AtomicInteger;
 import java.util.stream.Collectors;
@@ -28,7 +29,7 @@ public class OrderServiceImpl implements OrderService {
         if(request != null && request.getProductIds() != null) {
      
             List<Product> products = productService.getByIds(request.getProductIds());
-            Double total = products.stream().collect(Collectors.summingDouble(Product::getPrice));
+            BigDecimal total = products.stream().collect(Collectors.reducing(BigDecimal.ZERO, Product::getPrice, BigDecimal::add));
 
             order.setProducts(products);
             order.setTotal(total);
