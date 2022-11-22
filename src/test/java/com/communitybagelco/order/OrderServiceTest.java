@@ -1,5 +1,8 @@
 package com.communitybagelco.order;
 
+import javax.inject.Inject;
+import javax.persistence.EntityManager;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -7,10 +10,13 @@ import com.communitybagelco.product.ProductServiceImpl;
 
 public class OrderServiceTest {
     
+    @Inject
+    EntityManager entityManager;
+
     @Test
     public void whenHandleOrderHasNullRequestThenExpectNoExcpetion() {
 
-        OrderService service = new OrderServiceImpl(new ProductServiceImpl());
+        OrderService service = new OrderServiceImpl(new ProductServiceImpl(entityManager));
 
         Assertions.assertDoesNotThrow(() -> service.handleOrder((OrderRequest) null));
     }
@@ -18,7 +24,7 @@ public class OrderServiceTest {
     @Test
     public void whenHandleOrderHasRequestWithNoProductIdThenExpectNoExceptions() {
 
-        OrderService service = new OrderServiceImpl(new ProductServiceImpl());
+        OrderService service = new OrderServiceImpl(new ProductServiceImpl(entityManager));
 
         Assertions.assertDoesNotThrow(() -> service.handleOrder(new OrderRequest()));
     }
@@ -26,7 +32,7 @@ public class OrderServiceTest {
     @Test
     public void whenHandleOrderIsValidThenExpectId() {
 
-        OrderService service = new OrderServiceImpl(new ProductServiceImpl());
+        OrderService service = new OrderServiceImpl(new ProductServiceImpl(entityManager));
 
         Order result = service.handleOrder(new OrderRequest());
 
@@ -36,7 +42,7 @@ public class OrderServiceTest {
     @Test
     public void whenHandleOrderIsCalledTwiceThenExpectIdValue() {
 
-        OrderService service = new OrderServiceImpl(new ProductServiceImpl());
+        OrderService service = new OrderServiceImpl(new ProductServiceImpl(entityManager));
 
         service.handleOrder(new OrderRequest());
         Order result = service.handleOrder(new OrderRequest());

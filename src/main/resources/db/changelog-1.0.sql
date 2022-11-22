@@ -8,3 +8,11 @@ CREATE TABLE products (
     price DECIMAL(19, 2),
     PRIMARY KEY (product_id)
 );
+
+--changeset jmchugh:2
+INSERT INTO products (name, description, price)
+VALUES
+('Plain', 'Simple delicousness', 1.75),
+('Everything', 'The bagel that corrupts others', 1.75),
+('Poppy', 'Poppy seed coating', 1.75),
+('Onion', 'The bagel with many layers', 1.75)

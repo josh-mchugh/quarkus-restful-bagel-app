@@ -5,56 +5,41 @@ import java.util.Collection;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
+import javax.persistence.EntityManager;
+import javax.persistence.TypedQuery;
+import javax.persistence.criteria.CriteriaBuilder;
+import javax.persistence.criteria.CriteriaQuery;
+import javax.persistence.criteria.Root;
+import javax.transaction.Transactional;
 
 import com.communitybagelco.category.Category;
 
+import lombok.AllArgsConstructor;
+
 @ApplicationScoped
+@AllArgsConstructor
+@Transactional
 public class ProductServiceImpl implements ProductService {
     
-    private static final Category BAGEL_CATEGORY = new Category("Bagels");
-
-    private final List<Product> PRODUCTS;
-
-    public ProductServiceImpl() {
-
-        Product plain = new Product();
-        plain.setId(1);
-        plain.setName("Plain");
-        plain.setPrice(new BigDecimal("1.75"));
-
-        Product everything = new Product();
-        everything.setId(2);
-        everything.setName("Everything");
-        everything.setPrice(new BigDecimal("1.75"));
-
-        Product poppy = new Product();
-        poppy.setId(3);
-        poppy.setName("Poppy");
-        poppy.setPrice(new BigDecimal("1.75"));
-
-        Product onion = new Product();
-        onion.setId(4);
-        onion.setName("Onion");
-        onion.setPrice(new BigDecimal("1.75"));
-
-        PRODUCTS = List.of(
-            plain,
-            everything,
-            poppy,
-            onion
-        );
-    }
+    private final EntityManager entityManager;
 
     @Override
     public List<Product> getAll() {
         
-        return PRODUCTS;
+        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
+        CriteriaQuery<Product> cq = cb.createQuery(Product.class);
+        Root<Product> rootEntry = cq.from(Product.class);
+        CriteriaQuery<Product> all = cq.select(rootEntry);
+    
+        TypedQuery<Product> allQuery = entityManager.createQuery(all);
+        
+        return allQuery.getResultList();
     }
 
     @Override
     public List<Product> getByIds(Collection<Integer> ids) {
         
-        return PRODUCTS.stream()
+        return getAll().stream()
             .filter(product -> ids.contains(product.getId()))
             .toList();
     }    
