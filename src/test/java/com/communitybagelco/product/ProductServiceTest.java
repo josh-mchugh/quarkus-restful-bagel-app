@@ -4,13 +4,11 @@ import java.math.BigDecimal;
 import java.util.List;
 
 import javax.inject.Inject;
-import javax.persistence.EntityManager;
 
+import org.jooq.DSLContext;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-
-import com.communitybagelco.category.Category;
 
 import io.quarkus.test.junit.QuarkusTest;
 
@@ -18,7 +16,7 @@ import io.quarkus.test.junit.QuarkusTest;
 public class ProductServiceTest {
     
     @Inject
-    EntityManager entityManager;
+    DSLContext dsl;
 
     private Product plain;
     private Product everything;
@@ -56,7 +54,7 @@ public class ProductServiceTest {
     @Test
     public void whenGetAllThenExpectList() {
 
-        Category category = new Category("Bagels");
+        //Category category = new Category("Bagels");
         List<Product> expected = List.of(
             plain,
             everything,
@@ -64,7 +62,7 @@ public class ProductServiceTest {
             onion
         );
 
-        ProductService service = new ProductServiceImpl(entityManager);
+        ProductService service = new ProductServiceImpl(dsl);
 
         Assertions.assertIterableEquals(expected, service.getAll());
     }
@@ -72,13 +70,13 @@ public class ProductServiceTest {
     @Test
     public void whenGetByIdsThenExpectList() {
 
-        Category category = new Category("Bagels");
+        //Category category = new Category("Bagels");
         List<Product> expected = List.of(
             plain,
             everything
         );
 
-        ProductService service = new ProductServiceImpl(entityManager);
+        ProductService service = new ProductServiceImpl(dsl);
 
         Assertions.assertEquals(expected, service.getByIds(List.of(1, 2)));
     }

@@ -5,8 +5,6 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.communitybagelco.category.Category;
-
 public class ProductTest {
     
     @Test
@@ -48,9 +46,9 @@ public class ProductTest {
     @Test
     public void whenProductHasCategoryThenExpectCategory() {
 
-        Category category = new Category("test");
+        //Category category = new Category("test");
 
-        Product product = new Product();
+        //Product product = new Product();
         //product.setCategory(category);
 
         //Assertions.assertEquals(category, product.getCategory());

@@ -1,18 +1,13 @@
 package com.communitybagelco.product;
 
-import java.math.BigDecimal;
 import java.util.Collection;
 import java.util.List;
 
 import javax.enterprise.context.ApplicationScoped;
-import javax.persistence.EntityManager;
-import javax.persistence.TypedQuery;
-import javax.persistence.criteria.CriteriaBuilder;
-import javax.persistence.criteria.CriteriaQuery;
-import javax.persistence.criteria.Root;
 import javax.transaction.Transactional;
 
-import com.communitybagelco.category.Category;
+import org.jooq.DSLContext;
+import org.jooq.generated.tables.Products;
 
 import lombok.AllArgsConstructor;
 
@@ -21,19 +16,15 @@ import lombok.AllArgsConstructor;
 @Transactional
 public class ProductServiceImpl implements ProductService {
     
-    private final EntityManager entityManager;
+
+    private final DSLContext dsl;
 
     @Override
     public List<Product> getAll() {
-        
-        CriteriaBuilder cb = entityManager.getCriteriaBuilder();
-        CriteriaQuery<Product> cq = cb.createQuery(Product.class);
-        Root<Product> rootEntry = cq.from(Product.class);
-        CriteriaQuery<Product> all = cq.select(rootEntry);
-    
-        TypedQuery<Product> allQuery = entityManager.createQuery(all);
-        
-        return allQuery.getResultList();
+                
+        return dsl.selectFrom(Products.PRODUCTS)
+            .fetch()
+            .into(Product.class);
     }
 
     @Override
