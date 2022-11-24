@@ -30,8 +30,9 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> getByIds(Collection<Integer> ids) {
         
-        return getAll().stream()
-            .filter(product -> ids.contains(product.getId()))
-            .toList();
+        return dsl.selectFrom(Products.PRODUCTS)
+            .where(Products.PRODUCTS.PRODUCT_ID.in(ids))
+            .fetch()
+            .into(Product.class);
     }    
 }
