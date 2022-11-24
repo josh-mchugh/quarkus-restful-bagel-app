@@ -1,4 +1,4 @@
-package com.communitybagelco.product;
+package com.communitybagelco.product.entity;
 
 import java.util.Collection;
 import java.util.List;
@@ -14,25 +14,25 @@ import lombok.AllArgsConstructor;
 @ApplicationScoped
 @AllArgsConstructor
 @Transactional
-public class ProductServiceImpl implements ProductService {
+public class ProductEntityServiceImpl implements ProductEntityService {
     
 
     private final DSLContext dsl;
 
     @Override
-    public List<Product> getAll() {
+    public List<ProductEntity> getAll() {
                 
         return dsl.selectFrom(Products.PRODUCTS)
             .fetch()
-            .into(Product.class);
+            .into(ProductEntity.class);
     }
 
     @Override
-    public List<Product> getByIds(Collection<Integer> ids) {
+    public List<ProductEntity> getByIds(Collection<Integer> ids) {
         
         return dsl.selectFrom(Products.PRODUCTS)
             .where(Products.PRODUCTS.PRODUCT_ID.in(ids))
             .fetch()
-            .into(Product.class);
+            .into(ProductEntity.class);
     }    
 }

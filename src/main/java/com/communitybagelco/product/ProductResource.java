@@ -6,6 +6,8 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
+import com.communitybagelco.product.entity.ProductEntityService;
+
 import lombok.RequiredArgsConstructor;
 
 @Path("/api/product")
@@ -13,7 +15,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductResource {
 
-    private final ProductService service;
+    private final ProductEntityService service;
 
     @GET
     public Response getProducts() {

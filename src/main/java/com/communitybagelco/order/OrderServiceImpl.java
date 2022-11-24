@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import com.communitybagelco.product.Product;
-import com.communitybagelco.product.ProductService;
+import com.communitybagelco.product.entity.ProductEntity;
+import com.communitybagelco.product.entity.ProductEntityService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -16,7 +16,7 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     
-    private final ProductService productService;
+    private final ProductEntityService productService;
 
     private AtomicInteger counter = new AtomicInteger();
 
@@ -28,8 +28,8 @@ public class OrderServiceImpl implements OrderService {
 
         if(request != null && request.getProductIds() != null) {
      
-            List<Product> products = productService.getByIds(request.getProductIds());
-            BigDecimal total = products.stream().collect(Collectors.reducing(BigDecimal.ZERO, Product::getPrice, BigDecimal::add));
+            List<ProductEntity> products = productService.getByIds(request.getProductIds());
+            BigDecimal total = products.stream().collect(Collectors.reducing(BigDecimal.ZERO, ProductEntity::getPrice, BigDecimal::add));
 
             order.setProducts(products);
             order.setTotal(total);

@@ -6,7 +6,7 @@ import org.jooq.DSLContext;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.communitybagelco.product.ProductServiceImpl;
+import com.communitybagelco.product.entity.ProductEntityServiceImpl;
 
 public class OrderServiceTest {
     
@@ -16,7 +16,7 @@ public class OrderServiceTest {
     @Test
     public void whenHandleOrderHasNullRequestThenExpectNoExcpetion() {
 
-        OrderService service = new OrderServiceImpl(new ProductServiceImpl(dsl));
+        OrderService service = new OrderServiceImpl(new ProductEntityServiceImpl(dsl));
 
         Assertions.assertDoesNotThrow(() -> service.handleOrder((OrderRequest) null));
     }
@@ -24,7 +24,7 @@ public class OrderServiceTest {
     @Test
     public void whenHandleOrderHasRequestWithNoProductIdThenExpectNoExceptions() {
 
-        OrderService service = new OrderServiceImpl(new ProductServiceImpl(dsl));
+        OrderService service = new OrderServiceImpl(new ProductEntityServiceImpl(dsl));
 
         Assertions.assertDoesNotThrow(() -> service.handleOrder(new OrderRequest()));
     }
@@ -32,7 +32,7 @@ public class OrderServiceTest {
     @Test
     public void whenHandleOrderIsValidThenExpectId() {
 
-        OrderService service = new OrderServiceImpl(new ProductServiceImpl(dsl));
+        OrderService service = new OrderServiceImpl(new ProductEntityServiceImpl(dsl));
 
         Order result = service.handleOrder(new OrderRequest());
 
@@ -42,7 +42,7 @@ public class OrderServiceTest {
     @Test
     public void whenHandleOrderIsCalledTwiceThenExpectIdValue() {
 
-        OrderService service = new OrderServiceImpl(new ProductServiceImpl(dsl));
+        OrderService service = new OrderServiceImpl(new ProductEntityServiceImpl(dsl));
 
         service.handleOrder(new OrderRequest());
         Order result = service.handleOrder(new OrderRequest());

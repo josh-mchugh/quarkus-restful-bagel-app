@@ -1,4 +1,4 @@
-package com.communitybagelco.product;
+package com.communitybagelco.product.entity;
 
 import java.math.BigDecimal;
 
@@ -20,7 +20,7 @@ import lombok.ToString;
 @Table(name = "products")
 @ToString
 @RegisterForReflection
-public class Product {
+public class ProductEntity {
     
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -58,7 +58,7 @@ public class Product {
             return false;
         if (getClass() != obj.getClass())
             return false;
-        Product other = (Product) obj;
+        ProductEntity other = (ProductEntity) obj;
         if (id == null) {
             if (other.id != null)
                 return false;
