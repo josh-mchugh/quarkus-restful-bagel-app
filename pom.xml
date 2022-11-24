@@ -50,7 +50,7 @@
     </dependency>
     <dependency>
       <groupId>io.quarkus</groupId>
-      <artifactId>quarkus-liquibase</artifactId>
+      <artifactId>quarkus-flyway</artifactId>
     </dependency>
     <dependency>
       <groupId>io.quarkiverse.jooq</groupId>
@@ -155,7 +155,7 @@
                             - ? matches a single character in a directory / file name -->
                         <property>
                           <key>scripts</key>
-                          <value>src/main/resources/db/*.sql</value>
+                          <value>src/main/resources/db/migration/*.sql</value>
                         </property>
                         
                         <!-- The sort order of the scripts within a directory, where:
@@ -166,7 +166,7 @@
                             - none: doesn't sort directory contents after fetching them from the directory -->
                         <property>
                           <key>sort</key>
-                          <value>none</value>
+                          <value>flyway</value>
                         </property>
                         
                         <!-- The default schema for unqualified objects:
@@ -187,7 +187,7 @@
                             - lower: unquoted object names are turned into lower case (e.g. PostgreSQL) -->
                         <property>
                           <key>defaultNameCase</key>
-                          <value>as_is</value>
+                          <value>upper</value>
                         </property>
                       </properties>
                     </database>

@@ -1,6 +1,3 @@
---liquibase formatted sql
-        
---changeset jmchugh:1
 CREATE TABLE products (
     product_id INT NOT NULL AUTO_INCREMENT,  
     name VARCHAR(255) NOT NULL,
@@ -9,7 +6,6 @@ CREATE TABLE products (
     PRIMARY KEY (product_id)
 );
 
---changeset jmchugh:2
 INSERT INTO products (name, description, price)
 VALUES
 ('Plain', 'Simple delicousness', 1.75),
