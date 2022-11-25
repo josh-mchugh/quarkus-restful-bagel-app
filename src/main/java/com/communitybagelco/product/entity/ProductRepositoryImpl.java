@@ -15,7 +15,7 @@ import static org.jooq.generated.tables.Products.PRODUCTS;
 @ApplicationScoped
 @AllArgsConstructor
 @Transactional
-public class ProductEntityServiceImpl implements ProductEntityService {
+public class ProductRepositoryImpl implements ProductRepository {
     
 
     private final DSLContext dsl;

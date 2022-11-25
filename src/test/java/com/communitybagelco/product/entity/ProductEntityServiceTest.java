@@ -62,9 +62,9 @@ public class ProductEntityServiceTest {
             onion
         );
 
-        ProductEntityService service = new ProductEntityServiceImpl(dsl);
+        ProductRepository repository = new ProductRepositoryImpl(dsl);
 
-        Assertions.assertIterableEquals(expected, service.getAll());
+        Assertions.assertIterableEquals(expected, repository.getAll());
     }
 
     @Test
@@ -76,8 +76,8 @@ public class ProductEntityServiceTest {
             everything
         );
 
-        ProductEntityService service = new ProductEntityServiceImpl(dsl);
+        ProductRepository repository = new ProductRepositoryImpl(dsl);
 
-        Assertions.assertEquals(expected, service.getByIds(List.of(1, 2)));
+        Assertions.assertEquals(expected, repository.getByIds(List.of(1, 2)));
     }
 }
