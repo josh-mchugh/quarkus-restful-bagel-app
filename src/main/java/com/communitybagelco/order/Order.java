@@ -3,7 +3,7 @@ package com.communitybagelco.order;
 import java.math.BigDecimal;
 import java.util.List;
 
-import com.communitybagelco.product.entity.ProductEntity;
+import com.communitybagelco.product.model.Product;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.Data;
@@ -13,6 +13,6 @@ import lombok.Data;
 public class Order {
     
     private Integer id;
-    private List<ProductEntity> products;
+    private List<Product> products;
     private BigDecimal total;
 }

@@ -7,8 +7,8 @@ import java.util.stream.Collectors;
 
 import javax.enterprise.context.ApplicationScoped;
 
-import com.communitybagelco.product.entity.ProductEntity;
 import com.communitybagelco.product.entity.ProductRepository;
+import com.communitybagelco.product.model.Product;
 
 import lombok.RequiredArgsConstructor;
 
@@ -28,8 +28,8 @@ public class OrderServiceImpl implements OrderService {
 
         if(request != null && request.getProductIds() != null) {
      
-            List<ProductEntity> products = productRepository.getByIds(request.getProductIds());
-            BigDecimal total = products.stream().collect(Collectors.reducing(BigDecimal.ZERO, ProductEntity::getPrice, BigDecimal::add));
+            List<Product> products = productRepository.findByIds(request.getProductIds());
+            BigDecimal total = products.stream().collect(Collectors.reducing(BigDecimal.ZERO, Product::getPrice, BigDecimal::add));
 
             order.setProducts(products);
             order.setTotal(total);

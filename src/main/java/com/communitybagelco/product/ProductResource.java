@@ -6,7 +6,7 @@ import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 
-import com.communitybagelco.product.entity.ProductRepository;
+import com.communitybagelco.product.service.ProductService;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,11 +15,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class ProductResource {
 
-    private final ProductRepository service;
+    private final ProductService service;
 
     @GET
     public Response getProducts() {
         
-        return Response.ok(service.getAll()).build();
+        return Response.ok(service.findAll()).build();
     }
 }

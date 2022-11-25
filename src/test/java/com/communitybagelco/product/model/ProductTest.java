@@ -1,5 +1,7 @@
 package com.communitybagelco.product.model;
 
+import java.math.BigDecimal;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -39,9 +41,9 @@ public class ProductTest {
     public void whenProductHasPriceThenExpectPrice() {
 
         Product product = Product.builder()
-            .price(1.75F)
+            .price(new BigDecimal("1.75"))
             .build();
 
-        Assertions.assertEquals(1.75F, product.getPrice());
+        Assertions.assertEquals(new BigDecimal("1.75"), product.getPrice());
     }
 }
