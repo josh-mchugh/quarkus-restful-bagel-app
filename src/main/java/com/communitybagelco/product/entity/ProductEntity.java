@@ -1,6 +1,7 @@
 package com.communitybagelco.product.entity;
 
 import java.math.BigDecimal;
+import java.util.Objects;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -38,47 +39,21 @@ public class ProductEntity {
 
     //@ToString.Exclude
     //private Category category;
-
+    
     @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((id == null) ? 0 : id.hashCode());
-        result = prime * result + ((name == null) ? 0 : name.hashCode());
-        result = prime * result + ((description == null) ? 0 : description.hashCode());
-        result = prime * result + ((price == null) ? 0 : price.hashCode());
-        return result;
+    public boolean equals(Object o) {
+
+        if (this == o) return true;
+        if (!(o instanceof ProductEntity)) return false;
+        
+        ProductEntity entity = (ProductEntity) o;
+        
+        return Objects.equals(getId(), entity.getId());
     }
 
     @Override
-    public boolean equals(Object obj) {
-        if (this == obj)
-            return true;
-        if (obj == null)
-            return false;
-        if (getClass() != obj.getClass())
-            return false;
-        ProductEntity other = (ProductEntity) obj;
-        if (id == null) {
-            if (other.id != null)
-                return false;
-        } else if (!id.equals(other.id))
-            return false;
-        if (name == null) {
-            if (other.name != null)
-                return false;
-        } else if (!name.equals(other.name))
-            return false;
-        if (description == null) {
-            if (other.description != null)
-                return false;
-        } else if (!description.equals(other.description))
-            return false;
-        if (price == null) {
-            if (other.price != null)
-                return false;
-        } else if (!price.equals(other.price))
-            return false;
-        return true;
-    }    
+    public int hashCode() {
+
+        return Objects.hash(getId());
+    }
 }
