@@ -69,7 +69,7 @@ public class ProductTest {
     }
 
     @Test
-    public void whenProductIsEqualExpectEquals() {
+    public void whenProductIsEqualExpectTrue() {
 
         Product product1 = Product.builder()
             .id(1)
@@ -85,11 +85,26 @@ public class ProductTest {
             .price(new BigDecimal("1.75"))
             .build();
 
-        Assertions.assertEquals(product1, product2);
+        Assertions.assertTrue(product1.equals(product2));
     }
 
     @Test
-    public void whenProductIsNotEmptyThenExpectNotEquals() {
+    public void whenProductIsSameInstanceThenExpectTrue() {
+
+        Product product1 = Product.builder()
+            .id(1)
+            .name("name")
+            .description("description")
+            .price(new BigDecimal("1.75"))
+            .build();
+
+        Product product2 = product1;
+
+        Assertions.assertTrue(product1.equals(product2));
+    }
+
+    @Test
+    public void whenProductIsNotEmptyThenExpectFalse() {
 
         Product product1 = Product.builder()
             .id(1)
@@ -100,7 +115,15 @@ public class ProductTest {
 
         Product product2 = Product.builder().build();
 
-        Assertions.assertNotEquals(product1, product2);
+        Assertions.assertFalse(product1.equals(product2));
+    }
+
+    @Test
+    public void whenProductIsNotSameTypeEqualsThenExpectFalse() {
+
+        Product product = Product.builder().build();
+        
+        Assertions.assertFalse(product.equals(new Object()));
     }
 
     @Test
