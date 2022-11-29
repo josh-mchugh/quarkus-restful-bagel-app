@@ -72,10 +72,8 @@ public class OrderResourceTest {
                 .body("id", greaterThan(0))
                 .body("products[0].name", is("Plain"))
                 .body("products[0].price", is(1.75F))
-                //.body("products[1].category.name", is("Bagels"))
                 .body("products[1].name", is("Everything"))
                 .body("products[1].price", is(1.75F))
-                //.body("products[1].category.name", is("Bagels"))
                 .body("total", is(3.5F));
     }
 }

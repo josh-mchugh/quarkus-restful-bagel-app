@@ -36,9 +36,6 @@ public class ProductEntity {
 
     @Column(name = "price")
     private BigDecimal price;
-
-    //@ToString.Exclude
-    //private Category category;
     
     @Override
     public boolean equals(Object o) {

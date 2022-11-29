@@ -37,7 +37,6 @@ public class ProductRepositoryTest {
     @Test
     public void whenGetByIdsThenExpectList() {
 
-        //Category category = new Category("Bagels");
         List<Product> expected = List.of(
             getPlainBagel(),
             getEverythingBagel()

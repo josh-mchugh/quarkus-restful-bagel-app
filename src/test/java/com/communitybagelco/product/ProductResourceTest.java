@@ -41,15 +41,11 @@ public class ProductResourceTest {
             .then()
                 .body("[0].name", is("Plain"))
                 .body("[0].price", is(1.75F))
-                //.body("[0].category.name", is("Bagels"))
                 .body("[1].name", is("Everything"))
                 .body("[1].price", is(1.75F))
-                //.body("[1].category.name", is("Bagels"))
                 .body("[2].name", is("Poppy"))
                 .body("[2].price", is(1.75F))
-                //.body("[2].category.name", is("Bagels"))
                 .body("[3].name", is("Onion"))
                 .body("[3].price", is(1.75F));
-                //.body("[3].category.name", is("Bagels"));
     }
 }
