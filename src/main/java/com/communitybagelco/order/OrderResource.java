@@ -7,6 +7,9 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.communitybagelco.order.service.OrderService;
+import com.communitybagelco.order.service.model.OrderRequest;
+
 import lombok.RequiredArgsConstructor;
 
 @Path("/api/order")

@@ -4,12 +4,13 @@ import javax.ws.rs.core.Response;
 
 import org.junit.jupiter.api.Test;
 
+import com.communitybagelco.order.service.model.OrderRequest;
+
 import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
 
-import static org.hamcrest.CoreMatchers.is;
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.greaterThan;
 
@@ -69,11 +70,6 @@ public class OrderResourceTest {
                 .post("/api/order")
             .then()
                 .body("id", notNullValue())
-                .body("id", greaterThan(0))
-                .body("products[0].name", is("Plain"))
-                .body("products[0].price", is(1.75F))
-                .body("products[1].name", is("Everything"))
-                .body("products[1].price", is(1.75F))
-                .body("total", is(3.5F));
+                .body("id", greaterThan(0));
     }
 }

@@ -1,4 +1,4 @@
-package com.communitybagelco.order;
+package com.communitybagelco.order.service.model;
 
 import java.util.List;
 

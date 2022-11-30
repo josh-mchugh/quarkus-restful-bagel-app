@@ -1,4 +1,4 @@
-package com.communitybagelco.order;
+package com.communitybagelco.order.service;
 
 import javax.inject.Inject;
 
@@ -6,6 +6,8 @@ import org.jooq.DSLContext;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import com.communitybagelco.order.model.Order;
+import com.communitybagelco.order.service.model.OrderRequest;
 import com.communitybagelco.product.entity.ProductRepositoryImpl;
 
 public class OrderServiceTest {
