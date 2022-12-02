@@ -1,12 +1,10 @@
 package com.communitybagelco.order.service;
 
-import java.util.concurrent.atomic.AtomicInteger;
-
 import javax.enterprise.context.ApplicationScoped;
 
+import com.communitybagelco.order.entity.OrderRepository;
 import com.communitybagelco.order.model.Order;
 import com.communitybagelco.order.service.model.OrderRequest;
-import com.communitybagelco.product.entity.ProductRepository;
 
 import lombok.RequiredArgsConstructor;
 
@@ -14,13 +12,11 @@ import lombok.RequiredArgsConstructor;
 @RequiredArgsConstructor
 public class OrderServiceImpl implements OrderService {
     
-    private final ProductRepository productRepository;
-
-    private AtomicInteger counter = new AtomicInteger();
+    private final OrderRepository orderRepository;
 
     @Override
-    public Order handleOrder(OrderRequest request) {
+    public Order createOrder(OrderRequest request) {
         
-        return new Order(counter.incrementAndGet());
+        return orderRepository.create();
     }
 }

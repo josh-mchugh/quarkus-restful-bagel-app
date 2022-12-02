@@ -10,7 +10,6 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
-
 import static org.hamcrest.CoreMatchers.notNullValue;
 import static org.hamcrest.Matchers.greaterThan;
 
@@ -35,12 +34,27 @@ public class OrderResourceTest {
     }
 
     @Test
-    public void whenOrderRequestHasEmptyProductIdsThenExpectBadRequest() {
+    public void whenOrderRequestHasNullProductIdsThenExpectBadRequest() {
 
         given()
             .when()
                 .contentType(ContentType.JSON)
                 .body(new OrderRequest())
+                .post("/api/order")
+            .then()
+                .statusCode(Response.Status.BAD_REQUEST.getStatusCode());
+    }
+
+    @Test
+    public void whenOrdeReqeuestHasEmptyProductIdsThenExpectBadRequest() {
+
+        OrderRequest request = new OrderRequest();
+        request.setProductIds(List.of());
+
+        given()
+            .when()
+                .contentType(ContentType.JSON)
+                .body(request)
                 .post("/api/order")
             .then()
                 .statusCode(Response.Status.BAD_REQUEST.getStatusCode());
@@ -70,6 +84,7 @@ public class OrderResourceTest {
                 .post("/api/order")
             .then()
                 .body("id", notNullValue())
-                .body("id", greaterThan(0));
+                .body("id", greaterThan(0))
+                .body("timestamp", notNullValue());
     }
 }

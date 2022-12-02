@@ -1,5 +1,6 @@
 package com.communitybagelco.order.entity;
 
+import java.time.LocalDateTime;
 import java.util.Objects;
 
 import javax.persistence.Column;
@@ -26,6 +27,9 @@ public class OrderEntity {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "order_id", nullable = false)
     private Integer id;
+
+    @Column(name = "timestamp")
+    private LocalDateTime timestamp;
 
     @Override
     public boolean equals(Object o) {

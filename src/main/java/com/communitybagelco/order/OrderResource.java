@@ -20,13 +20,13 @@ public class OrderResource {
     private final OrderService orderService;
 
     @POST
-    public Response handleOrderRequest(OrderRequest request) {
+    public Response handleCreateOrder(OrderRequest request) {
 
         if(request == null || request.getProductIds() == null || request.getProductIds().size() == 0) {
 
             return Response.status(Status.BAD_REQUEST).build();
         }
         
-        return Response.ok(orderService.handleOrder(request)).build();
+        return Response.ok(orderService.createOrder(request)).build();
     }
 }

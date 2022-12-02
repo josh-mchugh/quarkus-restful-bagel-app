@@ -5,5 +5,5 @@ import com.communitybagelco.order.service.model.OrderRequest;
 
 public interface OrderService {
 
-    Order handleOrder(OrderRequest request);
+    Order createOrder(OrderRequest request);
 }

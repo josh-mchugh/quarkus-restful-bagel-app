@@ -1,5 +1,8 @@
 package com.communitybagelco.order.entity;
 
+import java.time.LocalDateTime;
+import java.time.format.DateTimeFormatter;
+
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
@@ -15,12 +18,24 @@ public class OrderEntityTest {
     }
 
     @Test
+    public void whenEntityHasTimestampExpectTimeStamp() {
+
+        LocalDateTime now = LocalDateTime.now();
+
+        OrderEntity entity = new OrderEntity();
+        entity.setTimestamp(now);
+
+        Assertions.assertEquals(now, entity.getTimestamp());
+    }
+
+    @Test
     public void whenEntityToStringThenExpectString() {
 
-        String expected = "OrderEntity(id=1)";
+        String expected = "OrderEntity(id=1, timestamp=2011-12-03T10:15:30)";
 
         OrderEntity entity = new OrderEntity();
         entity.setId(1);
+        entity.setTimestamp(LocalDateTime.parse("2011-12-03T10:15:30", DateTimeFormatter.ISO_LOCAL_DATE_TIME));
 
         Assertions.assertEquals(expected, entity.toString());
     }
