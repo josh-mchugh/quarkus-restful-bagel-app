@@ -1,13 +1,18 @@
 package com.communitybagelco.order.entity;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.FetchType;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
@@ -30,6 +35,19 @@ public class OrderEntity {
 
     @Column(name = "timestamp")
     private LocalDateTime timestamp;
+
+    @OneToMany(cascade = CascadeType.ALL, fetch = FetchType.LAZY, orphanRemoval = true, mappedBy = "order")
+    private List<OrderDetailEntity> orderDetails = new ArrayList<>();
+
+    public void addOrderDetail(OrderDetailEntity orderDetailEntity) {
+
+        if(orderDetails == null) {
+
+            orderDetails = new ArrayList<>();
+        }
+
+        orderDetails.add(orderDetailEntity); 
+    }
 
     @Override
     public boolean equals(Object o) {
