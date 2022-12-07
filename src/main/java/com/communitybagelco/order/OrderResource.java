@@ -22,7 +22,7 @@ public class OrderResource {
     @POST
     public Response handleCreateOrder(OrderRequest request) {
 
-        if(request == null || request.getProductIds() == null || request.getProductIds().size() == 0) {
+        if(request == null || request.getItems() == null || request.getItems().size() == 0) {
 
             return Response.status(Status.BAD_REQUEST).build();
         }

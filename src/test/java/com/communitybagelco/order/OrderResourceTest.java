@@ -22,7 +22,11 @@ public class OrderResourceTest {
     public void whenOrderRequestIsValidThenExpectOk() {
 
         OrderRequest request = new OrderRequest();
-        request.setProductIds(List.of(1, 2, 3));
+        request.setItems(List.of(
+            new OrderRequest.Item(1, 1),
+            new OrderRequest.Item(2, 1),
+            new OrderRequest.Item(3, 1)
+        ));
 
         given()
             .when()
@@ -46,10 +50,10 @@ public class OrderResourceTest {
     }
 
     @Test
-    public void whenOrdeReqeuestHasEmptyProductIdsThenExpectBadRequest() {
+    public void whenOrdeReqeuestHasEmptyItemsThenExpectBadRequest() {
 
         OrderRequest request = new OrderRequest();
-        request.setProductIds(List.of());
+        request.setItems(List.of());
 
         given()
             .when()
@@ -72,10 +76,13 @@ public class OrderResourceTest {
     }
 
     @Test
-    public void whenOrderHasValidProductsThenExpectBody() {
+    public void whenOrderHasValidItemssThenExpectBody() {
 
         OrderRequest request = new OrderRequest();
-        request.setProductIds(List.of(1, 2));
+        request.setItems(List.of(
+            new OrderRequest.Item(1, 1),
+            new OrderRequest.Item(2, 1)
+        ));
 
         given()
             .when()
