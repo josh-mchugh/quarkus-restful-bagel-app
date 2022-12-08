@@ -1,6 +1,8 @@
 package com.communitybagelco.product.model;
 
 import java.math.BigDecimal;
+import java.util.Collections;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
@@ -57,5 +59,29 @@ public class ProductMapperTest {
         Product product = ProductMapper.map(entity);
 
         Assertions.assertEquals(new BigDecimal("1.75"), product.getPrice());
+    }
+
+    @Test
+    public void whenEntitiesAreValidThenExpectResults() {
+
+        List<ProductEntity> entities = List.of(
+            new ProductEntity(),
+            new ProductEntity()
+        );
+
+        List<Product> products = ProductMapper.map(entities);
+
+        List<Product> expected = List.of(
+            Product.builder().build(),
+            Product.builder().build()
+        );
+
+        Assertions.assertEquals(expected, products);
+    }
+
+    @Test
+    public void whenEntitiesIsNullThenExpectEmptyArray() {
+
+        Assertions.assertEquals(Collections.emptyList(), ProductMapper.map((List<ProductEntity>) null));
     }
 }
