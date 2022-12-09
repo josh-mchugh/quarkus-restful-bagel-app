@@ -9,8 +9,6 @@ import org.jooq.DSLContext;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.communitybagelco.product.model.Product;
-
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
@@ -22,7 +20,7 @@ public class ProductRepositoryTest {
     @Test
     public void whenGetAllThenExpectList() {
 
-        List<Product> expected = List.of(
+        List<ProductEntity> expected = List.of(
             getPlainBagel(),
             getEverythingBagel(),
             getPoppyBagel(),
@@ -37,7 +35,7 @@ public class ProductRepositoryTest {
     @Test
     public void whenGetByIdsThenExpectList() {
 
-        List<Product> expected = List.of(
+        List<ProductEntity> expected = List.of(
             getPlainBagel(),
             getEverythingBagel()
         );
@@ -47,43 +45,47 @@ public class ProductRepositoryTest {
         Assertions.assertEquals(expected, repository.findByIds(List.of(1, 2)));
     }
 
-    private Product getPlainBagel() {
+    private ProductEntity getPlainBagel() {
 
-        return Product.builder()
-            .id(1)
-            .name("Plain")
-            .description("Simple delicousness")
-            .price(new BigDecimal("1.75"))
-            .build();
+        ProductEntity entity = new ProductEntity();
+        entity.setId(1);
+        entity.setName("name");
+        entity.setDescription("Simple delicousness");
+        entity.setPrice(new BigDecimal("1.75"));
+
+        return entity;
     }
 
-    private Product getEverythingBagel() {
+    private ProductEntity getEverythingBagel() {
 
-        return Product.builder()
-            .id(2)
-            .name("Everything")
-            .description("The bagel that corrupts others")
-            .price(new BigDecimal("1.75"))
-            .build();
+        ProductEntity entity = new ProductEntity();
+        entity.setId(2);
+        entity.setName("Everything");
+        entity.setDescription("The bagel that corrupts others");
+        entity.setPrice(new BigDecimal("1.75"));
+
+        return entity;
     }
 
-    private Product getPoppyBagel() {
+    private ProductEntity getPoppyBagel() {
 
-        return Product.builder()
-            .id(3)
-            .name("Poppy")
-            .description("Poppy seed coating")
-            .price(new BigDecimal("1.75"))
-            .build();
+        ProductEntity entity = new ProductEntity();
+        entity.setId(3);
+        entity.setName("Poppy");
+        entity.setDescription("Poppy seed coating");
+        entity.setPrice(new BigDecimal("1.75"));
+
+        return entity;
     }
 
-    private Product getOnionBagel() {
+    private ProductEntity getOnionBagel() {
 
-        return Product.builder()
-            .id(4)
-            .name("Onion")
-            .description("The bagel with many layers")
-            .price(new BigDecimal("1.75"))
-            .build();
+        ProductEntity entity = new ProductEntity();
+        entity.setId(4);
+        entity.setName("Onion");
+        entity.setDescription("The bagel with many layers");
+        entity.setPrice(new BigDecimal("1.75"));
+
+        return entity;
     }
 }

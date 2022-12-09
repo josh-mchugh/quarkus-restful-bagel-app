@@ -3,11 +3,9 @@ package com.communitybagelco.product.entity;
 import java.util.Collection;
 import java.util.List;
 
-import com.communitybagelco.product.model.Product;
-
 public interface ProductRepository {
     
-    List<Product> findAll();
+    List<ProductEntity> findAll();
 
-    List<Product> findByIds(Collection<Integer> ids);
+    List<ProductEntity> findByIds(Collection<Integer> ids);
 }

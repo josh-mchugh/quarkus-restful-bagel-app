@@ -7,6 +7,7 @@ import javax.enterprise.context.ApplicationScoped;
 
 import com.communitybagelco.product.entity.ProductRepository;
 import com.communitybagelco.product.model.Product;
+import com.communitybagelco.product.model.ProductMapper;
 
 import lombok.AllArgsConstructor;
 
@@ -19,12 +20,12 @@ public class ProductServiceImpl implements ProductService {
     @Override
     public List<Product> findAll() {
         
-        return productRepository.findAll();
+        return ProductMapper.map(productRepository.findAll());
     }
 
     @Override
     public List<Product> findByIds(Collection<Integer> ids) {
         
-        return productRepository.findByIds(ids);
+        return ProductMapper.map(productRepository.findByIds(ids));
     }
 }

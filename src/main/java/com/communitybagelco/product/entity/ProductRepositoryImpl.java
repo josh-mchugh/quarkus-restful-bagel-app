@@ -8,8 +8,6 @@ import javax.transaction.Transactional;
 
 import org.jooq.DSLContext;
 
-import com.communitybagelco.product.model.Product;
-
 import lombok.AllArgsConstructor;
 
 import static org.jooq.generated.tables.Products.PRODUCTS;
@@ -23,19 +21,19 @@ public class ProductRepositoryImpl implements ProductRepository {
     private final DSLContext dsl;
 
     @Override
-    public List<Product> findAll() {
+    public List<ProductEntity> findAll() {
                 
         return dsl.selectFrom(PRODUCTS)
             .fetch()
-            .into(Product.class);
+            .into(ProductEntity.class);
     }
 
     @Override
-    public List<Product> findByIds(Collection<Integer> ids) {
+    public List<ProductEntity> findByIds(Collection<Integer> ids) {
         
         return dsl.selectFrom(PRODUCTS)
             .where(PRODUCTS.PRODUCT_ID.in(ids))
             .fetch()
-            .into(Product.class);
+            .into(ProductEntity.class);
     }    
 }
