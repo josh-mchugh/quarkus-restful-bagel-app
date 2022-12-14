@@ -2,6 +2,7 @@ package com.communitybagelco.product.entity;
 
 import java.util.Collection;
 import java.util.List;
+import java.util.Optional;
 
 import javax.enterprise.context.ApplicationScoped;
 import javax.transaction.Transactional;
@@ -19,6 +20,14 @@ public class ProductRepositoryImpl implements ProductRepository {
     
 
     private final DSLContext dsl;
+    
+    @Override
+    public Optional<ProductEntity> findById(Integer id) {
+        
+        return dsl.selectFrom(PRODUCTS)
+            .where(PRODUCTS.PRODUCT_ID.eq(id))
+            .fetchOptionalInto(ProductEntity.class);
+    }
 
     @Override
     public List<ProductEntity> findAll() {

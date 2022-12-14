@@ -1,6 +1,7 @@
 package com.communitybagelco.product.entity;
 
 import java.math.BigDecimal;
+import java.util.Collections;
 import java.util.List;
 
 import javax.inject.Inject;
@@ -18,7 +19,33 @@ public class ProductRepositoryTest {
     DSLContext dsl;
 
     @Test
-    public void whenGetAllThenExpectList() {
+    public void whenFindByIdIsValidThenExpectEntity() {
+        
+        ProductEntity expected = getPlainBagel();
+
+        ProductRepository repository = new ProductRepositoryImpl(dsl);
+
+        Assertions.assertEquals(expected, repository.findById(1).get());
+    }
+
+    @Test
+    public void whenFindByIdHasNullParamThenExpectEmpty() {
+
+        ProductRepository repository = new ProductRepositoryImpl(dsl);
+
+        Assertions.assertTrue(repository.findById(null).isEmpty());
+    }
+
+    @Test
+    public void whenFindByIdHasNoExistingIdThenEmpty() {
+
+        ProductRepository repository = new ProductRepositoryImpl(dsl);
+
+        Assertions.assertTrue(repository.findById(Integer.MAX_VALUE).isEmpty());
+    }
+
+    @Test
+    public void whenFindAllThenExpectList() {
 
         List<ProductEntity> expected = List.of(
             getPlainBagel(),
@@ -33,7 +60,7 @@ public class ProductRepositoryTest {
     }
 
     @Test
-    public void whenGetByIdsThenExpectList() {
+    public void whenFindByIdsThenExpectList() {
 
         List<ProductEntity> expected = List.of(
             getPlainBagel(),
@@ -43,6 +70,22 @@ public class ProductRepositoryTest {
         ProductRepository repository = new ProductRepositoryImpl(dsl);
 
         Assertions.assertEquals(expected, repository.findByIds(List.of(1, 2)));
+    }
+
+    @Test
+    public void whenFindByIdsHasEmptyCollectionThenExpectEmptyList() {
+
+        ProductRepository repository = new ProductRepositoryImpl(dsl);
+
+        Assertions.assertEquals(Collections.emptyList(), repository.findByIds(Collections.emptyList()));
+    }
+
+    @Test
+    public void whenFindByIdsHasNullThenExpectEmptyList() {
+
+        ProductRepository repository = new ProductRepositoryImpl(dsl);
+
+        Assertions.assertEquals(Collections.emptyList(), repository.findByIds(null));
     }
 
     private ProductEntity getPlainBagel() {
