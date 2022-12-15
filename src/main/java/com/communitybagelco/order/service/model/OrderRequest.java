@@ -1,5 +1,6 @@
 package com.communitybagelco.order.service.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
@@ -11,7 +12,7 @@ import lombok.NoArgsConstructor;
 @RegisterForReflection
 public class OrderRequest {
     
-    private List<Item> items;
+    private List<Item> items = new ArrayList<>();
 
     @Data
     @AllArgsConstructor

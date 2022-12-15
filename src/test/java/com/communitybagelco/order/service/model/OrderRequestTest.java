@@ -49,7 +49,7 @@ public class OrderRequestTest {
     @Test
     public void whenOrderRequestEmptyHashCodeExpectValue() {
 
-        Assertions.assertEquals(102, new OrderRequest().hashCode());
+        Assertions.assertEquals(60, new OrderRequest().hashCode());
     }
 
     @Test

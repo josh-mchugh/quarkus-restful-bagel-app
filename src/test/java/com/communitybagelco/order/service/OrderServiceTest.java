@@ -25,7 +25,7 @@ public class OrderServiceTest {
             .timestamp(LocalDateTime.now())
             .build();
 
-        Mockito.when(orderRepository.create()).thenReturn(order);
+        Mockito.when(orderRepository.create(Mockito.any(OrderRequest.class))).thenReturn(order);
     }
 
     @Test
@@ -63,4 +63,6 @@ public class OrderServiceTest {
 
         Assertions.assertNotNull(result.getTimestamp());
     }
+
+    //TODO: when Create Order has Product Ids Then Expect Products
 }

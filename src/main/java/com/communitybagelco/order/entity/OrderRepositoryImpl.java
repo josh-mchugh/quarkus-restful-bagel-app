@@ -7,6 +7,8 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import com.communitybagelco.order.model.Order;
+import com.communitybagelco.order.service.model.OrderRequest;
+import com.communitybagelco.product.entity.ProductRepository;
 
 import lombok.AllArgsConstructor;
 
@@ -16,13 +18,27 @@ import lombok.AllArgsConstructor;
 public class OrderRepositoryImpl implements OrderRepository {
     
     private final EntityManager entityManager;
+    private final ProductRepository productRepository;
 
     @Override
-    public Order create() {
+    public Order create(OrderRequest request) {
         
         OrderEntity entity = new OrderEntity();
         entity.setTimestamp(LocalDateTime.now());
         
+        request.getItems().forEach(item -> {
+            productRepository.findById(item.getProductId())
+                .ifPresent(productEntity -> {
+
+                    OrderDetailEntity orderDetailEntity = new OrderDetailEntity();
+                    orderDetailEntity.setOrder(entity);
+                    orderDetailEntity.setProduct(productEntity);
+                    orderDetailEntity.setQuantity(item.getQuantity());
+
+                    entity.addOrderDetail(orderDetailEntity);
+                });
+        }); 
+
         entityManager.persist(entity);
 
         return Order.builder()

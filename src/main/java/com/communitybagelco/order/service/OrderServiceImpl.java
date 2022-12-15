@@ -17,6 +17,6 @@ public class OrderServiceImpl implements OrderService {
     @Override
     public Order createOrder(OrderRequest request) {
         
-        return orderRepository.create();
+        return orderRepository.create(request);
     }
 }
