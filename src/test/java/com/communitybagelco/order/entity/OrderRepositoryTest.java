@@ -1,7 +1,11 @@
 package com.communitybagelco.order.entity;
 
+import java.util.Collections;
+import java.util.List;
+
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
+import javax.persistence.PersistenceException;
 import javax.transaction.Transactional;
 
 import org.junit.jupiter.api.Assertions;
@@ -12,7 +16,6 @@ import com.communitybagelco.order.service.model.OrderRequest;
 import com.communitybagelco.product.entity.ProductRepository;
 
 import io.quarkus.test.junit.QuarkusTest;
-import io.quarkus.test.junit.mockito.InjectMock;
 
 @QuarkusTest
 @Transactional
@@ -21,7 +24,7 @@ public class OrderRepositoryTest {
     @Inject
     EntityManager entityManager;
 
-    @InjectMock
+    @Inject
     ProductRepository productRepository;
 
     @Test
@@ -44,17 +47,86 @@ public class OrderRepositoryTest {
         Assertions.assertNotNull(order.getTimestamp());
     }
 
-    // TODO: with null order request
+    @Test
+    public void whenCreateParamIsNullThenExpectException() {
+        
+        OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-    // TODO: with empty order request items
+        Assertions.assertThrows(NullPointerException.class, () -> repository.create((OrderRequest) null));
+    }
 
-    // TODO: with null order request items
+    @Test
+    public void whenCreateParamHasValidItemsThenExpectId() {
 
-    // TODO: with valid order request items
+        OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-    // TODO: with null order request item
+        OrderRequest.Item item = new OrderRequest.Item();
+        item.setProductId(1);
+        item.setQuantity(1);
 
-    // TODO: with null order request item product id
+        OrderRequest request = new OrderRequest();
+        request.setItems(List.of(item));
 
-    // TODO: with null order request item quantity 
+        Assertions.assertNotNull(repository.create(request).getId());
+    }
+
+    @Test
+    public void whenCreateParamHasEmptyItemsThenExpectId() {
+
+        OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
+
+        Assertions.assertNotNull(repository.create(new OrderRequest()).getId());
+    }
+
+    @Test
+    public void whenCreateParamHasNullItemsThenExpectException() {
+
+        OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
+
+        OrderRequest request = new OrderRequest();
+        request.setItems(null);
+
+        Assertions.assertThrows(NullPointerException.class, () -> repository.create(request));
+    }
+
+    @Test
+    public void whenCreateParamHasNullItemThenExpectException() {
+
+        OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
+
+        OrderRequest request = new OrderRequest();
+        request.setItems(Collections.singletonList(null));
+
+        Assertions.assertThrows(NullPointerException.class, () -> repository.create(request));
+    }
+
+    @Test
+    public void whenCreateParamHasItemWithNullProductIdThenExpectNoException() {
+
+        OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
+
+        OrderRequest.Item item = new OrderRequest.Item();
+        item.setProductId(null);
+        item.setQuantity(1);
+
+        OrderRequest request = new OrderRequest();
+        request.setItems(List.of(item));
+
+        Assertions.assertDoesNotThrow(() -> repository.create(request));
+    }
+
+    @Test
+    public void whenCreateParamHasItemNullQuantityThenExpectId() {
+
+        OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
+
+        OrderRequest.Item item = new OrderRequest.Item();
+        item.setProductId(1);
+        item.setQuantity(null);
+
+        OrderRequest request = new OrderRequest();
+        request.setItems(List.of(item));
+
+        Assertions.assertThrows(PersistenceException.class, () -> repository.create(request));
+    }
 }

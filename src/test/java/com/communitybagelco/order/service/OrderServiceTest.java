@@ -1,6 +1,7 @@
 package com.communitybagelco.order.service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
@@ -49,7 +50,7 @@ public class OrderServiceTest {
 
         OrderService service = new OrderServiceImpl(orderRepository);
 
-        Order result = service.createOrder(new OrderRequest());
+        Order result = service.createOrder(createOrderRequest());
 
         Assertions.assertEquals(1, result.getId());
     }
@@ -59,10 +60,20 @@ public class OrderServiceTest {
 
         OrderService service = new OrderServiceImpl(orderRepository);
 
-        Order result = service.createOrder(new OrderRequest());
+        Order result = service.createOrder(createOrderRequest());
 
         Assertions.assertNotNull(result.getTimestamp());
     }
 
-    //TODO: when Create Order has Product Ids Then Expect Products
+    private OrderRequest createOrderRequest() {
+
+        OrderRequest.Item item = new OrderRequest.Item();
+        item.setProductId(1);
+        item.setQuantity(1);
+
+        OrderRequest request = new OrderRequest();
+        request.setItems(List.of(item));
+
+        return request;
+    }
 }

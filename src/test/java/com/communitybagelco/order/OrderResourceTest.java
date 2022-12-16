@@ -38,18 +38,6 @@ public class OrderResourceTest {
     }
 
     @Test
-    public void whenOrderRequestHasNullProductIdsThenExpectBadRequest() {
-
-        given()
-            .when()
-                .contentType(ContentType.JSON)
-                .body(new OrderRequest())
-                .post("/api/order")
-            .then()
-                .statusCode(Response.Status.BAD_REQUEST.getStatusCode());
-    }
-
-    @Test
     public void whenOrdeReqeuestHasEmptyItemsThenExpectBadRequest() {
 
         OrderRequest request = new OrderRequest();
