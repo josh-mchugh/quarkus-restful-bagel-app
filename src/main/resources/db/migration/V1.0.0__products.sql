@@ -6,9 +6,18 @@ CREATE TABLE IF NOT EXISTS products (
     PRIMARY KEY (product_id)
 );
 
-INSERT INTO products (name, description, price)
-VALUES
-('Plain', 'Simple delicousness', 1.75),
-('Everything', 'The bagel that corrupts others', 1.75),
-('Poppy', 'Poppy seed coating', 1.75),
-('Onion', 'The bagel with many layers', 1.75);
+INSERT INTO products (product_id, name, description, price)
+SELECT 1, 'Plain', 'Simple delicousness', 1.75
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 1);
+
+INSERT INTO products (product_id, name, description, price)
+SELECT 2, 'Everything', 'The bagel that corrupts others', 1.75
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 2);
+
+INSERT INTO products (product_id, name, description, price)
+SELECT 3, 'Poppy', 'Poppy seed coating', 1.75
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 3);
+
+INSERT INTO products (product_id, name, description, price)
+SELECT 4, 'Onion', 'The bagel with many layers', 1.75
+WHERE NOT EXISTS (SELECT 1 FROM products WHERE product_id = 4);
