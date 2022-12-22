@@ -1,5 +1,5 @@
 package com.communitybagelco.menu.repository;
 
-public class MenuRepositoryIT {
+public class MenuItemRepositoryIT {
     
 }

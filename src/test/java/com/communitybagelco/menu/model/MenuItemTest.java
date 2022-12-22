@@ -8,12 +8,12 @@ import org.junit.jupiter.api.Test;
 public class MenuItemTest {
 
     @Test
-    public void whenMenuItemHasIdThenExpectId() {
+    public void whenMenuItemHasProductIdThenExpectProductId() {
 
         MenuItem item = new MenuItem();
-        item.setId(1);
+        item.setProductId(1);
 
-        Assertions.assertEquals(1, item.getId());
+        Assertions.assertEquals(1, item.getProductId());
     }
 
     @Test
@@ -37,7 +37,7 @@ public class MenuItemTest {
     @Test
     public void whenMenuItemToStringThenExpectString() {
 
-        String expected = "MenuItem(id=1, name=name, price=1.75)";
+        String expected = "MenuItem(productId=1, name=name, price=1.75)";
 
         Assertions.assertEquals(expected, createMenuItem().toString());
     }
@@ -106,7 +106,7 @@ public class MenuItemTest {
     private MenuItem createMenuItem(Integer id) {
 
         MenuItem item = new MenuItem();
-        item.setId(id);
+        item.setProductId(id);
         item.setName("name");
         item.setPrice(new BigDecimal("1.75"));
 

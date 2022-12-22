@@ -1,5 +1,5 @@
 package com.communitybagelco.menu;
 
-public class MenuResourceIT {
+public class MenuItemResource {
     
 }
