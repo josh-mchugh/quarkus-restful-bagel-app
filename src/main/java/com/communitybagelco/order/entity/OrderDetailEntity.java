@@ -12,7 +12,7 @@ import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 
-import com.communitybagelco.product.entity.ProductEntity;
+import com.communitybagelco.product.ProductEntity;
 
 import io.quarkus.runtime.annotations.RegisterForReflection;
 import lombok.Getter;

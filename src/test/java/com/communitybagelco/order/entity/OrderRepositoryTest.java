@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 import com.communitybagelco.order.model.Order;
 import com.communitybagelco.order.service.model.OrderRequest;
-import com.communitybagelco.product.entity.ProductRepository;
+import com.communitybagelco.product.ProductRepository;
 
 import io.quarkus.test.junit.QuarkusTest;
 

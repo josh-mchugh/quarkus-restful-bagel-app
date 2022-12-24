@@ -1,4 +1,4 @@
-package com.communitybagelco.product.entity;
+package com.communitybagelco.product;
 
 import java.math.BigDecimal;
 

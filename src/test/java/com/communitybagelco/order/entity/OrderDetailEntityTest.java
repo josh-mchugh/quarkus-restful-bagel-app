@@ -3,7 +3,7 @@ package com.communitybagelco.order.entity;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.communitybagelco.product.entity.ProductEntity;
+import com.communitybagelco.product.ProductEntity;
 
 public class OrderDetailEntityTest {
     

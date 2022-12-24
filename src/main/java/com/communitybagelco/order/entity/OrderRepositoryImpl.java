@@ -8,7 +8,7 @@ import javax.transaction.Transactional;
 
 import com.communitybagelco.order.model.Order;
 import com.communitybagelco.order.service.model.OrderRequest;
-import com.communitybagelco.product.entity.ProductRepository;
+import com.communitybagelco.product.ProductRepository;
 
 import lombok.AllArgsConstructor;
 
