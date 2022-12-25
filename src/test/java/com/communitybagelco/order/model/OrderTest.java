@@ -6,6 +6,8 @@ import java.time.format.DateTimeFormatter;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 public class OrderTest {
  
     @Test
@@ -100,6 +102,13 @@ public class OrderTest {
         Order order2 = createOrder(2);
 
         Assertions.assertFalse(order1.equals(order2));
+    }
+
+    @Test
+    public void orderEqualsContract() {
+
+        EqualsVerifier.simple().forClass(Order.class)
+            .verify();
     }
 
     private Order createOrder(){

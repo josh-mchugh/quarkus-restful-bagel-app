@@ -5,6 +5,9 @@ import java.math.BigDecimal;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+
 public class MenuItemTest {
 
     @Test
@@ -96,6 +99,14 @@ public class MenuItemTest {
         MenuItem item = createMenuItem();
         
         Assertions.assertFalse(item.equals(null));
+    }
+
+    @Test
+    public void menuItemContract() {
+
+        EqualsVerifier.simple().forClass(MenuItem.class)
+            .suppress(Warning.BIGDECIMAL_EQUALITY)
+            .verify();
     }
 
     private MenuItem createMenuItem() {

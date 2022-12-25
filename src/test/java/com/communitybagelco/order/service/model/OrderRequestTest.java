@@ -5,6 +5,8 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+
 public class OrderRequestTest {
     
     @Test
@@ -95,6 +97,13 @@ public class OrderRequestTest {
     }
 
     @Test
+    public void orderRequestEqualsContract() {
+
+        EqualsVerifier.simple().forClass(OrderRequest.class)
+            .verify();
+    }
+
+    @Test
     public void whenOrderRequestItemHasProductIdThenExpectProductId() {
 
         OrderRequest.Item item = new OrderRequest.Item();
@@ -170,6 +179,13 @@ public class OrderRequestTest {
         OrderRequest.Item item2 = createOrderRequestItem(2);
 
         Assertions.assertFalse(item1.equals(item2));
+    }
+
+    @Test
+    public void orderRequestItemEqualsContract() {
+
+        EqualsVerifier.simple().forClass(OrderRequest.Item.class)
+            .verify();
     }
 
     private OrderRequest.Item createOrderRequestItem() {
