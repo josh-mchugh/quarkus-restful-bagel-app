@@ -2,12 +2,12 @@ package com.communitybagelco.menu.model;
 
 import java.math.BigDecimal;
 
-import lombok.Data;
+import org.immutables.value.Value;
 
-@Data
-public class MenuItem {
+@Value.Immutable
+public abstract class MenuItem {
 
-    private Integer productId;
-    private String name;
-    private BigDecimal price;
+    public abstract Integer productId();
+    public abstract String name();
+    public abstract BigDecimal price();
 }

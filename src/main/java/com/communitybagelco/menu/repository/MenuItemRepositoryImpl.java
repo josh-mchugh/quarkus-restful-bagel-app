@@ -7,6 +7,7 @@ import javax.transaction.Transactional;
 
 import org.jooq.DSLContext;
 
+import com.communitybagelco.menu.model.ImmutableMenuItem;
 import com.communitybagelco.menu.model.MenuItem;
 
 import lombok.AllArgsConstructor;
@@ -24,8 +25,6 @@ public class MenuItemRepositoryImpl implements MenuItemRepository {
     public List<MenuItem> findAll() {
 
         return dsl.selectFrom(MENU_ITEMS)
-            .fetchInto(MenuItem.class);
+            .fetchInto(ImmutableMenuItem.class);
     }
-    
-    
 }

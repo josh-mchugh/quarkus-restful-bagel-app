@@ -13,28 +13,31 @@ public class MenuItemTest {
     @Test
     public void whenMenuItemHasProductIdThenExpectProductId() {
 
-        MenuItem item = new MenuItem();
-        item.setProductId(1);
+        MenuItem item = ImmutableMenuItem.builder()
+            .productId(1)
+            .build();
 
-        Assertions.assertEquals(1, item.getProductId());
+        Assertions.assertEquals(1, item.productId());
     }
 
     @Test
     public void whenMenuItemHasNameThenExpectName() {
 
-        MenuItem item = new MenuItem();
-        item.setName("name");
+        MenuItem item = ImmutableMenuItem.builder()
+            .name("name")
+            .build();
 
-        Assertions.assertEquals("name", item.getName());
+        Assertions.assertEquals("name", item.name());
     }
 
     @Test
     public void whenMenuItemHasPriceThenExpectPrice() {
 
-        MenuItem item = new MenuItem();
-        item.setPrice(new BigDecimal("1.75"));
+        MenuItem item = ImmutableMenuItem.builder()
+            .price(new BigDecimal("1.75"))
+            .build();
 
-        Assertions.assertEquals(new BigDecimal("1.75"), item.getPrice());
+        Assertions.assertEquals(new BigDecimal("1.75"), item.price());
     }
 
     @Test
@@ -54,7 +57,9 @@ public class MenuItemTest {
     @Test
     public void whenMenuItemEmptyHashCodeThenExpectHashCode() {
 
-        Assertions.assertEquals(357642, new MenuItem().hashCode());
+        MenuItem item = ImmutableMenuItem.builder().build();
+
+        Assertions.assertEquals(357642, item.hashCode());
     }
     
     @Test
@@ -104,8 +109,8 @@ public class MenuItemTest {
     @Test
     public void menuItemContract() {
 
-        EqualsVerifier.simple().forClass(MenuItem.class)
-            .suppress(Warning.BIGDECIMAL_EQUALITY)
+        EqualsVerifier.simple().forClass(ImmutableMenuItem.class)
+            .suppress(Warning.INHERITED_DIRECTLY_FROM_OBJECT)
             .verify();
     }
 
@@ -116,12 +121,11 @@ public class MenuItemTest {
 
     private MenuItem createMenuItem(Integer id) {
 
-        MenuItem item = new MenuItem();
-        item.setProductId(id);
-        item.setName("name");
-        item.setPrice(new BigDecimal("1.75"));
-
-        return item;
+        return ImmutableMenuItem.builder()
+            .productId(id)
+            .name("name")
+            .price(new BigDecimal("1.75"))
+            .build();
     }
     
 }
