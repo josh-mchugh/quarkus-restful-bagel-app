@@ -1,4 +1,4 @@
-package com.communitybagelco.order;
+package com.communitybagelco.order.resource;
 
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
@@ -7,8 +7,8 @@ import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
 import javax.ws.rs.core.Response.Status;
 
+import com.communitybagelco.order.resource.model.OrderBody;
 import com.communitybagelco.order.service.OrderService;
-import com.communitybagelco.order.service.model.OrderRequest;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,7 +20,7 @@ public class OrderResource {
     private final OrderService orderService;
 
     @POST
-    public Response handleCreateOrder(OrderRequest request) {
+    public Response handleCreateOrder(OrderBody request) {
 
         if(request == null || request.getItems().size() == 0) {
 

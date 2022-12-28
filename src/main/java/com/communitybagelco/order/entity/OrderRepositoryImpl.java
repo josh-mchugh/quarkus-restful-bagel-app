@@ -7,7 +7,7 @@ import javax.persistence.EntityManager;
 import javax.transaction.Transactional;
 
 import com.communitybagelco.order.model.Order;
-import com.communitybagelco.order.service.model.OrderRequest;
+import com.communitybagelco.order.resource.model.OrderBody;
 import com.communitybagelco.product.ProductRepository;
 
 import lombok.AllArgsConstructor;
@@ -21,7 +21,7 @@ public class OrderRepositoryImpl implements OrderRepository {
     private final ProductRepository productRepository;
 
     @Override
-    public Order create(OrderRequest request) {
+    public Order create(OrderBody request) {
         
         OrderEntity entity = new OrderEntity();
         entity.setTimestamp(LocalDateTime.now());

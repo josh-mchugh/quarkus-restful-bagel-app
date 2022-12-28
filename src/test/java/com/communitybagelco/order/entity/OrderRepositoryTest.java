@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
 import com.communitybagelco.order.model.Order;
-import com.communitybagelco.order.service.model.OrderRequest;
+import com.communitybagelco.order.resource.model.OrderBody;
 import com.communitybagelco.product.ProductRepository;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -32,7 +32,7 @@ public class OrderRepositoryTest {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        Order order = repository.create(new OrderRequest());
+        Order order = repository.create(new OrderBody());
 
         Assertions.assertNotNull(order.getId());
     }
@@ -42,7 +42,7 @@ public class OrderRepositoryTest {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        Order order = repository.create(new OrderRequest());
+        Order order = repository.create(new OrderBody());
 
         Assertions.assertNotNull(order.getTimestamp());
     }
@@ -52,7 +52,7 @@ public class OrderRepositoryTest {
         
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        Assertions.assertThrows(NullPointerException.class, () -> repository.create((OrderRequest) null));
+        Assertions.assertThrows(NullPointerException.class, () -> repository.create((OrderBody) null));
     }
 
     @Test
@@ -60,11 +60,11 @@ public class OrderRepositoryTest {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        OrderRequest.Item item = new OrderRequest.Item();
+        OrderBody.Item item = new OrderBody.Item();
         item.setProductId(1);
         item.setQuantity(1);
 
-        OrderRequest request = new OrderRequest();
+        OrderBody request = new OrderBody();
         request.setItems(List.of(item));
 
         Assertions.assertNotNull(repository.create(request).getId());
@@ -75,7 +75,7 @@ public class OrderRepositoryTest {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        Assertions.assertNotNull(repository.create(new OrderRequest()).getId());
+        Assertions.assertNotNull(repository.create(new OrderBody()).getId());
     }
 
     @Test
@@ -83,7 +83,7 @@ public class OrderRepositoryTest {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        OrderRequest request = new OrderRequest();
+        OrderBody request = new OrderBody();
         request.setItems(null);
 
         Assertions.assertThrows(NullPointerException.class, () -> repository.create(request));
@@ -94,7 +94,7 @@ public class OrderRepositoryTest {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        OrderRequest request = new OrderRequest();
+        OrderBody request = new OrderBody();
         request.setItems(Collections.singletonList(null));
 
         Assertions.assertThrows(NullPointerException.class, () -> repository.create(request));
@@ -105,11 +105,11 @@ public class OrderRepositoryTest {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        OrderRequest.Item item = new OrderRequest.Item();
+        OrderBody.Item item = new OrderBody.Item();
         item.setProductId(null);
         item.setQuantity(1);
 
-        OrderRequest request = new OrderRequest();
+        OrderBody request = new OrderBody();
         request.setItems(List.of(item));
 
         Assertions.assertDoesNotThrow(() -> repository.create(request));
@@ -120,11 +120,11 @@ public class OrderRepositoryTest {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        OrderRequest.Item item = new OrderRequest.Item();
+        OrderBody.Item item = new OrderBody.Item();
         item.setProductId(1);
         item.setQuantity(null);
 
-        OrderRequest request = new OrderRequest();
+        OrderBody request = new OrderBody();
         request.setItems(List.of(item));
 
         Assertions.assertThrows(PersistenceException.class, () -> repository.create(request));

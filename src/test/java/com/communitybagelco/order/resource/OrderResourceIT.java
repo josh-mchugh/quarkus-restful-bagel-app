@@ -1,4 +1,4 @@
-package com.communitybagelco.order;
+package com.communitybagelco.order.resource;
 
 import io.quarkus.test.junit.QuarkusIntegrationTest;
 

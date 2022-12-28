@@ -4,7 +4,7 @@ import javax.enterprise.context.ApplicationScoped;
 
 import com.communitybagelco.order.entity.OrderRepository;
 import com.communitybagelco.order.model.Order;
-import com.communitybagelco.order.service.model.OrderRequest;
+import com.communitybagelco.order.resource.model.OrderBody;
 
 import lombok.RequiredArgsConstructor;
 
@@ -15,7 +15,7 @@ public class OrderServiceImpl implements OrderService {
     private final OrderRepository orderRepository;
 
     @Override
-    public Order createOrder(OrderRequest request) {
+    public Order createOrder(OrderBody request) {
         
         return orderRepository.create(request);
     }

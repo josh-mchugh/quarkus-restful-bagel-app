@@ -1,4 +1,4 @@
-package com.communitybagelco.order.service.model;
+package com.communitybagelco.order.resource.model;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -10,8 +10,8 @@ import lombok.NoArgsConstructor;
 
 @Data
 @RegisterForReflection
-public class OrderRequest {
-    
+public class OrderBody {
+
     private List<Item> items = new ArrayList<>();
 
     @Data

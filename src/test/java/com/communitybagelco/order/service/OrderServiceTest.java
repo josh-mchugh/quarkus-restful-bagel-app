@@ -10,7 +10,7 @@ import org.mockito.Mockito;
 
 import com.communitybagelco.order.entity.OrderRepository;
 import com.communitybagelco.order.model.Order;
-import com.communitybagelco.order.service.model.OrderRequest;
+import com.communitybagelco.order.resource.model.OrderBody;
 
 public class OrderServiceTest {
 
@@ -26,7 +26,7 @@ public class OrderServiceTest {
             .timestamp(LocalDateTime.now())
             .build();
 
-        Mockito.when(orderRepository.create(Mockito.any(OrderRequest.class))).thenReturn(order);
+        Mockito.when(orderRepository.create(Mockito.any(OrderBody.class))).thenReturn(order);
     }
 
     @Test
@@ -34,7 +34,7 @@ public class OrderServiceTest {
 
         OrderService service = new OrderServiceImpl(orderRepository);
 
-        Assertions.assertDoesNotThrow(() -> service.createOrder((OrderRequest) null));
+        Assertions.assertDoesNotThrow(() -> service.createOrder((OrderBody) null));
     }
 
     @Test
@@ -42,7 +42,7 @@ public class OrderServiceTest {
 
         OrderService service = new OrderServiceImpl(orderRepository);
 
-        Assertions.assertDoesNotThrow(() -> service.createOrder(new OrderRequest()));
+        Assertions.assertDoesNotThrow(() -> service.createOrder(new OrderBody()));
     }
 
     @Test
@@ -65,13 +65,13 @@ public class OrderServiceTest {
         Assertions.assertNotNull(result.getTimestamp());
     }
 
-    private OrderRequest createOrderRequest() {
+    private OrderBody createOrderRequest() {
 
-        OrderRequest.Item item = new OrderRequest.Item();
+        OrderBody.Item item = new OrderBody.Item();
         item.setProductId(1);
         item.setQuantity(1);
 
-        OrderRequest request = new OrderRequest();
+        OrderBody request = new OrderBody();
         request.setItems(List.of(item));
 
         return request;
