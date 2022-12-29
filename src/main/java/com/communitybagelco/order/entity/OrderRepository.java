@@ -1,9 +1,9 @@
 package com.communitybagelco.order.entity;
 
-import com.communitybagelco.order.model.Order;
-import com.communitybagelco.order.resource.model.OrderBody;
+import com.communitybagelco.order.service.model.OrderRequest;
+import com.communitybagelco.order.service.model.OrderResponse;
 
 public interface OrderRepository {
  
-    Order create(OrderBody request);
+    OrderResponse create(OrderRequest request);
 }

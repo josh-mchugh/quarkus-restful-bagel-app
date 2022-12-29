@@ -1,14 +1,23 @@
 package com.communitybagelco.order.resource;
 
+import java.net.URI;
+import java.util.List;
+import java.util.stream.Collectors;
+
 import javax.ws.rs.POST;
 import javax.ws.rs.Path;
 import javax.ws.rs.Produces;
 import javax.ws.rs.core.MediaType;
 import javax.ws.rs.core.Response;
+import javax.ws.rs.core.UriBuilder;
 import javax.ws.rs.core.Response.Status;
 
 import com.communitybagelco.order.resource.model.OrderBody;
 import com.communitybagelco.order.service.OrderService;
+import com.communitybagelco.order.service.model.ImmutableItem;
+import com.communitybagelco.order.service.model.ImmutableOrderRequest;
+import com.communitybagelco.order.service.model.OrderRequest;
+import com.communitybagelco.order.service.model.OrderResponse;
 
 import lombok.RequiredArgsConstructor;
 
@@ -20,13 +29,31 @@ public class OrderResource {
     private final OrderService orderService;
 
     @POST
-    public Response handleCreateOrder(OrderBody request) {
+    public Response handleCreateOrder(OrderBody body) {
 
-        if(request == null || request.getItems().size() == 0) {
+        if(body == null || body.getItems().size() == 0) {
 
             return Response.status(Status.BAD_REQUEST).build();
         }
+
+        // TODO : Clean up
+        List<OrderRequest.Item> items  = body.getItems().stream()
+            .map (item ->  {
+                return ImmutableItem.builder()
+                    .productId(item.getProductId())
+                    .quantity(item.getQuantity())
+                    .build();
+            })
+            .collect(Collectors.toList());
+
+        OrderRequest request = ImmutableOrderRequest.builder()
+            .items(items)
+            .build();
+
+        OrderResponse response = orderService.createOrder(request);
         
-        return Response.ok(orderService.createOrder(request)).build();
+        URI uri = UriBuilder.fromPath(String.format("/api/invoice/%s", response.orderId())).build();
+
+        return Response.created(uri).build();
     }
 }

@@ -1,8 +1,5 @@
 package com.communitybagelco.order.entity;
 
-import java.util.Collections;
-import java.util.List;
-
 import javax.inject.Inject;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceException;
@@ -11,8 +8,10 @@ import javax.transaction.Transactional;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
-import com.communitybagelco.order.model.Order;
-import com.communitybagelco.order.resource.model.OrderBody;
+import com.communitybagelco.order.service.model.ImmutableItem;
+import com.communitybagelco.order.service.model.ImmutableOrderRequest;
+import com.communitybagelco.order.service.model.OrderRequest;
+import com.communitybagelco.order.service.model.OrderResponse;
 import com.communitybagelco.product.ProductRepository;
 
 import io.quarkus.test.junit.QuarkusTest;
@@ -28,23 +27,13 @@ public class OrderRepositoryTest {
     ProductRepository productRepository;
 
     @Test
-    public void whenCreateExpectIdNotNull() {
+    public void whenCreateExpectOrderIdNotNull() {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        Order order = repository.create(new OrderBody());
+        OrderResponse response = repository.create(ImmutableOrderRequest.builder().build());
 
-        Assertions.assertNotNull(order.getId());
-    }
-
-    @Test
-    public void whenCreateExpectTimestampNotNull() {
-
-        OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
-
-        Order order = repository.create(new OrderBody());
-
-        Assertions.assertNotNull(order.getTimestamp());
+        Assertions.assertNotNull(response.orderId());
     }
 
     @Test
@@ -52,30 +41,32 @@ public class OrderRepositoryTest {
         
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        Assertions.assertThrows(NullPointerException.class, () -> repository.create((OrderBody) null));
+        Assertions.assertThrows(NullPointerException.class, () -> repository.create((OrderRequest) null));
     }
 
     @Test
-    public void whenCreateParamHasValidItemsThenExpectId() {
+    public void whenCreateParamHasValidItemsThenExpectOrderId() {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        OrderBody.Item item = new OrderBody.Item();
-        item.setProductId(1);
-        item.setQuantity(1);
+        OrderRequest.Item item = ImmutableItem.builder()
+            .productId(1)
+            .quantity(1)
+            .build();
 
-        OrderBody request = new OrderBody();
-        request.setItems(List.of(item));
+        OrderRequest request = ImmutableOrderRequest.builder()
+            .addItems(item)
+            .build();
 
-        Assertions.assertNotNull(repository.create(request).getId());
+        Assertions.assertNotNull(repository.create(request).orderId());
     }
 
     @Test
-    public void whenCreateParamHasEmptyItemsThenExpectId() {
+    public void whenCreateParamHasEmptyItemsThenExpectOrderId() {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        Assertions.assertNotNull(repository.create(new OrderBody()).getId());
+        Assertions.assertNotNull(repository.create(ImmutableOrderRequest.builder().build()).orderId());
     }
 
     @Test
@@ -83,8 +74,9 @@ public class OrderRepositoryTest {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        OrderBody request = new OrderBody();
-        request.setItems(null);
+        OrderRequest request = ImmutableOrderRequest.builder()
+            .items(null)
+            .build();
 
         Assertions.assertThrows(NullPointerException.class, () -> repository.create(request));
     }
@@ -94,8 +86,9 @@ public class OrderRepositoryTest {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        OrderBody request = new OrderBody();
-        request.setItems(Collections.singletonList(null));
+        OrderRequest request = ImmutableOrderRequest.builder()
+            .addItems((ImmutableItem) null)
+            .build();
 
         Assertions.assertThrows(NullPointerException.class, () -> repository.create(request));
     }
@@ -104,13 +97,15 @@ public class OrderRepositoryTest {
     public void whenCreateParamHasItemWithNullProductIdThenExpectNoException() {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
+        
+        OrderRequest.Item item = ImmutableItem.builder()
+            .productId(null)
+            .quantity(1)
+            .build();
 
-        OrderBody.Item item = new OrderBody.Item();
-        item.setProductId(null);
-        item.setQuantity(1);
-
-        OrderBody request = new OrderBody();
-        request.setItems(List.of(item));
+        OrderRequest request = ImmutableOrderRequest.builder()
+            .addItems(item)
+            .build();
 
         Assertions.assertDoesNotThrow(() -> repository.create(request));
     }
@@ -120,12 +115,14 @@ public class OrderRepositoryTest {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
 
-        OrderBody.Item item = new OrderBody.Item();
-        item.setProductId(1);
-        item.setQuantity(null);
+        OrderRequest.Item item = ImmutableItem.builder()
+            .productId(1)
+            .quantity(null)
+            .build();
 
-        OrderBody request = new OrderBody();
-        request.setItems(List.of(item));
+        OrderRequest request = ImmutableOrderRequest.builder()
+            .addItems(item)
+            .build();
 
         Assertions.assertThrows(PersistenceException.class, () -> repository.create(request));
     }

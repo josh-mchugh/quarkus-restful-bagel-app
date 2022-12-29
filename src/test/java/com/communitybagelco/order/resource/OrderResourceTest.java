@@ -10,8 +10,7 @@ import io.quarkus.test.junit.QuarkusTest;
 import io.restassured.http.ContentType;
 
 import static io.restassured.RestAssured.given;
-import static org.hamcrest.CoreMatchers.notNullValue;
-import static org.hamcrest.Matchers.greaterThan;
+import static org.hamcrest.CoreMatchers.containsString;
 
 import java.util.List;
 
@@ -34,7 +33,7 @@ public class OrderResourceTest {
                 .body(request)    
                 .post("/api/order")
             .then()
-                .statusCode(Response.Status.OK.getStatusCode());
+                .statusCode(Response.Status.CREATED.getStatusCode());
     }
 
     @Test
@@ -64,7 +63,7 @@ public class OrderResourceTest {
     }
 
     @Test
-    public void whenOrderHasValidItemssThenExpectBody() {
+    public void whenOrderHasValidItemsThenExpectBody() {
 
         OrderBody request = new OrderBody();
         request.setItems(List.of(
@@ -78,8 +77,6 @@ public class OrderResourceTest {
                 .body(request)
                 .post("/api/order")
             .then()
-                .body("id", notNullValue())
-                .body("id", greaterThan(0))
-                .body("timestamp", notNullValue());
+                .header("location", containsString("/api/invoice/"));
     }
 }
