@@ -9,11 +9,11 @@ import nl.jqno.equalsverifier.EqualsVerifier;
 import nl.jqno.equalsverifier.Warning;
 
 public class MenuItemTest {
-
+    
     @Test
-    public void whenImmutableMenuItemHasProductIdThenExpectProductId() {
+    public void whenMenuItemItemHasProductIdThenExpectProductId() {
 
-        ImmutableMenuItem item = ImmutableMenuItem.builder()
+        MenuItem item = ImmutableMenuItem.builder()
             .productId(1)
             .build();
 
@@ -21,9 +21,9 @@ public class MenuItemTest {
     }
 
     @Test
-    public void whenImmutableMenuItemHasNameThenExpectName() {
+    public void whenMenuItemItemHasNameThenExpectName() {
 
-        ImmutableMenuItem item = ImmutableMenuItem.builder()
+        MenuItem item = ImmutableMenuItem.builder()
             .name("name")
             .build();
 
@@ -31,9 +31,9 @@ public class MenuItemTest {
     }
 
     @Test
-    public void whenImmutableMenuItemHasPriceThenExpectPrice() {
+    public void whenMenuItemItemHasPriceThenExpectPrice() {
 
-        ImmutableMenuItem item = ImmutableMenuItem.builder()
+        MenuItem item = ImmutableMenuItem.builder()
             .price(new BigDecimal("1.75"))
             .build();
 
@@ -41,85 +41,85 @@ public class MenuItemTest {
     }
 
     @Test
-    public void whenImmutableMenuItemToStringThenExpectString() {
+    public void whenMenuItemItemToStringThenExpectString() {
 
         String expected = "MenuItem{productId=1, name=name, price=1.75}";
 
-        Assertions.assertEquals(expected, createImmutableMenuItem().toString());
+        Assertions.assertEquals(expected, createMenuItem().toString());
     }
 
     @Test
-    public void whenImmutableMenuItemHashCodeThenExpectHashCode() {
+    public void whenMenuItemItemHashCodeThenExpectHashCode() {
 
-        Assertions.assertEquals(304715844, createImmutableMenuItem().hashCode());
+        Assertions.assertEquals(304715844, createMenuItem().hashCode());
     }
 
     @Test
-    public void whenImmutableMenuItemEmptyHashCodeThenExpectHashCode() {
+    public void whenMenuItemItemEmptyHashCodeThenExpectHashCode() {
 
-        ImmutableMenuItem item = ImmutableMenuItem.builder().build();
+        MenuItem item = ImmutableMenuItem.builder().build();
 
         Assertions.assertEquals(193376997, item.hashCode());
     }
     
     @Test
-    public void whenImmutableMenuItemIsEqualThenExpectTrue() {
+    public void whenMenuItemItemIsEqualThenExpectTrue() {
 
-        ImmutableMenuItem item1 = createImmutableMenuItem();
-        ImmutableMenuItem item2 = createImmutableMenuItem();
-
-        Assertions.assertTrue(item1.equals(item2));
-    }
-
-    @Test
-    public void whenImmutableMenuItemEqualsIsSameInstanceThenExpectTrue() {
-
-        ImmutableMenuItem item1 = createImmutableMenuItem();
-        ImmutableMenuItem item2 = item1;
+        MenuItem item1 = createMenuItem();
+        MenuItem item2 = createMenuItem();
 
         Assertions.assertTrue(item1.equals(item2));
     }
 
     @Test
-    public void whenImmutableMenuItemEqualsIsNotEqualThenExpectFalse() {
+    public void whenMenuItemItemEqualsIsSameInstanceThenExpectTrue() {
 
-        ImmutableMenuItem item1 = createImmutableMenuItem(1);
-        ImmutableMenuItem item2 = createImmutableMenuItem(2);
+        MenuItem item1 = createMenuItem();
+        MenuItem item2 = item1;
+
+        Assertions.assertTrue(item1.equals(item2));
+    }
+
+    @Test
+    public void whenMenuItemItemEqualsIsNotEqualThenExpectFalse() {
+
+        MenuItem item1 = createMenuItem(1);
+        MenuItem item2 = createMenuItem(2);
 
         Assertions.assertFalse(item1.equals(item2));
     }
 
     @Test
-    public void whenImmutableMenuItemEqualsIsNotSameTypethenExpectFalse() {
+    public void whenMenuItemItemEqualsIsNotSameTypethenExpectFalse() {
 
-        ImmutableMenuItem item1 = createImmutableMenuItem();
+        MenuItem item1 = createMenuItem();
         Object object = new Object();
 
         Assertions.assertFalse(item1.equals(object));
     }
 
     @Test
-    public void whenImmutableMenuItemEqualsIsNullThenExpectFalse() {
+    public void whenMenuItemItemEqualsIsNullThenExpectFalse() {
 
-        ImmutableMenuItem item = createImmutableMenuItem();
+        MenuItem item = createMenuItem();
         
         Assertions.assertFalse(item.equals(null));
     }
 
     @Test
-    public void immutableMenuItemEqualsContract() {
+    public void menuItemEqualsContract() {
 
         EqualsVerifier.simple().forClass(ImmutableMenuItem.class)
             .suppress(Warning.BIGDECIMAL_EQUALITY)
             .verify();
     }
 
-    private ImmutableMenuItem createImmutableMenuItem() {
+    private MenuItem createMenuItem() {
 
-        return createImmutableMenuItem(1);
+        return createMenuItem(1);
     }
 
-    private ImmutableMenuItem createImmutableMenuItem(Integer id) {
+    private MenuItem createMenuItem(Integer id) {
 
         return ImmutableMenuItem.builder()
             .productId(id)
