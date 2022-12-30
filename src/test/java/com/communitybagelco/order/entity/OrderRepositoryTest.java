@@ -70,30 +70,6 @@ public class OrderRepositoryTest {
     }
 
     @Test
-    public void whenCreateParamHasNullItemsThenExpectException() {
-
-        OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
-
-        OrderRequest request = ImmutableOrderRequest.builder()
-            .items(null)
-            .build();
-
-        Assertions.assertThrows(NullPointerException.class, () -> repository.create(request));
-    }
-
-    @Test
-    public void whenCreateParamHasNullItemThenExpectException() {
-
-        OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
-
-        OrderRequest request = ImmutableOrderRequest.builder()
-            .addItems((ImmutableItem) null)
-            .build();
-
-        Assertions.assertThrows(NullPointerException.class, () -> repository.create(request));
-    }
-
-    @Test
     public void whenCreateParamHasItemWithNullProductIdThenExpectNoException() {
 
         OrderRepository repository = new OrderRepositoryImpl(entityManager, productRepository);
