@@ -7,7 +7,6 @@ import org.junit.jupiter.api.Test;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 
-// TODO: Add Tests
 public class OrderRequestTest {
 
     @Test
