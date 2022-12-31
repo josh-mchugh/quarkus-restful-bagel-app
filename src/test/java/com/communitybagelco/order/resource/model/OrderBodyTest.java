@@ -57,10 +57,10 @@ public class OrderBodyTest {
     @Test
     public void whenOrderBodyEqualsSameInstanceThenExpectTrue() {
 
-        OrderBody request1 = new OrderBody();
-        OrderBody request2 = request1;
+        OrderBody body1 = new OrderBody();
+        OrderBody body2 = body1;
 
-        Assertions.assertTrue(request1.equals(request2));
+        Assertions.assertTrue(body1.equals(body2));
     }
 
     @Test
@@ -75,25 +75,25 @@ public class OrderBodyTest {
     @Test
     public void whenOrderBodyIsEqualThenExpectTrue() {
 
-        OrderBody request1 = new OrderBody();
-        request1.setItems(List.of(createOrderBodyItem()));
+        OrderBody body1 = new OrderBody();
+        body1.setItems(List.of(createOrderBodyItem()));
 
-        OrderBody request2 = new OrderBody();
-        request2.setItems(List.of(createOrderBodyItem()));
+        OrderBody body2 = new OrderBody();
+        body2.setItems(List.of(createOrderBodyItem()));
 
-        Assertions.assertTrue(request1.equals(request2));
+        Assertions.assertTrue(body1.equals(body2));
     }
 
     @Test
     public void whenOrderBodyIsNotEqualsThenExpectFalse() {
 
-        OrderBody request1 = new OrderBody();
-        request1.setItems(List.of(createOrderBodyItem(1)));
+        OrderBody body1 = new OrderBody();
+        body1.setItems(List.of(createOrderBodyItem(1)));
 
-        OrderBody request2 = new OrderBody();
-        request2.setItems(List.of(createOrderBodyItem(2)));
+        OrderBody body2 = new OrderBody();
+        body2.setItems(List.of(createOrderBodyItem(2)));
         
-        Assertions.assertFalse(request1.equals(request2));
+        Assertions.assertFalse(body1.equals(body2));
     }
 
     @Test
