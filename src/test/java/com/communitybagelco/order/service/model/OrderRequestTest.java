@@ -119,6 +119,7 @@ public class OrderRequestTest {
         EqualsVerifier.simple()
             .forClass(ImmutableOrderRequest.class)
             .withNonnullFields("items")
+            .withResetCaches()
             .verify();
     }
 
@@ -140,6 +141,77 @@ public class OrderRequestTest {
             .build();
 
         Assertions.assertEquals(1, item.quantity());
+    }
+
+    @Test
+    public void whenItemToStringThenExpectValue() {
+
+        String expected = "Item{productId=1, quantity=1}";
+
+        OrderRequest.Item item = createOrderRequestItem();
+
+        Assertions.assertEquals(expected, item.toString());
+    }
+
+    @Test
+    public void whenItemHashcodeThenExpectValue() {
+
+        OrderRequest.Item item = createOrderRequestItem();
+
+        Assertions.assertEquals(5859943, item.hashCode());
+    }
+
+    @Test
+    public void whenItemIsEmptyHashCodeThenExpectValue() {
+
+        OrderRequest.Item item = ImmutableItem.builder().build();
+
+        Assertions.assertEquals(5859909, item.hashCode());
+    }
+
+    @Test
+    public void whenItemEqualsIsSameInstanceThenExpectTrue() {
+
+        OrderRequest.Item item1 = createOrderRequestItem();
+        OrderRequest.Item item2 = item1;
+
+        Assertions.assertTrue(item1.equals(item2));
+    }
+
+    @Test
+    public void whenItemEqualsIsDifferentTypeThenExpectFalse() {
+
+        OrderRequest.Item item = createOrderRequestItem();
+        Object object = new Object();
+
+        Assertions.assertFalse(item.equals(object));
+    }
+
+    @Test
+    public void whenItemEqualsIsEqualThenExpectTrue() {
+
+        OrderRequest.Item item1 = createOrderRequestItem();
+        OrderRequest.Item item2 = createOrderRequestItem();
+
+        Assertions.assertTrue(item1.equals(item2));
+    }
+
+    @Test
+    public void whenItemEqualsIsNotEqualThenExpectFalse() {
+
+        OrderRequest.Item item1 = createOrderRequestItem(1);
+        OrderRequest.Item item2 = createOrderRequestItem(2);
+
+        Assertions.assertFalse(item1.equals(item2));
+    }
+
+    @Test
+    public void orderRequestItemContract() {
+
+        EqualsVerifier.simple()
+            .forClass(ImmutableItem.class)
+            .withResetCaches()
+            .verify();
     }
 
     private OrderRequest createOrderRequest() {

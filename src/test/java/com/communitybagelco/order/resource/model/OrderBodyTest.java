@@ -99,7 +99,9 @@ public class OrderBodyTest {
     @Test
     public void orderBodyEqualsContract() {
 
-        EqualsVerifier.simple().forClass(OrderBody.class)
+        EqualsVerifier.simple()
+            .forClass(OrderBody.class)
+            .withResetCaches()
             .verify();
     }
 
@@ -184,7 +186,9 @@ public class OrderBodyTest {
     @Test
     public void orderBodyItemEqualsContract() {
 
-        EqualsVerifier.simple().forClass(OrderBody.Item.class)
+        EqualsVerifier.simple()
+            .forClass(OrderBody.Item.class)
+            .withResetCaches()
             .verify();
     }
 

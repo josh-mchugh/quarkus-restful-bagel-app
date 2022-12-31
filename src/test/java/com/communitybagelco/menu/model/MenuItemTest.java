@@ -109,8 +109,10 @@ public class MenuItemTest {
     @Test
     public void menuItemEqualsContract() {
 
-        EqualsVerifier.simple().forClass(ImmutableMenuItem.class)
+        EqualsVerifier.simple()
+            .forClass(ImmutableMenuItem.class)
             .suppress(Warning.BIGDECIMAL_EQUALITY)
+            .withResetCaches()
             .verify();
     }
 
