@@ -1,4 +1,4 @@
-CREATE VIEW menu_items AS
+CREATE OR REPLACE VIEW menu_items AS
 SELECT
     p.product_id AS product_id,
     p.name AS name,
