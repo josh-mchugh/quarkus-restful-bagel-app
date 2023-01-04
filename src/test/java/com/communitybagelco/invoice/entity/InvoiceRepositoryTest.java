@@ -1,32 +1,37 @@
 package com.communitybagelco.invoice.entity;
 
+import java.util.Optional;
+
 import javax.inject.Inject;
 
-import org.jooq.DSLContext;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import com.communitybagelco.invoice.entity.model.ImmutableInvoiceRequest;
+import com.communitybagelco.invoice.entity.model.InvoiceRequest;
+import com.communitybagelco.invoice.model.Invoice;
 import com.communitybagelco.order.entity.OrderRepository;
 
 import io.quarkus.test.junit.QuarkusTest;
 
 @QuarkusTest
 public class InvoiceRepositoryTest {
-    
-    @Inject
-    DSLContext dsl;
 
     @Inject
     OrderRepository orderRepository;
 
+    @Inject
+    InvoiceRepository repository;
+
     @Test
-    public void whenOrderDoesNotExistByIdThenExpectNull() {
+    public void whenOrderDoesNotExistByIdThenExpectNotPresent() {
 
-        InvoiceRepository repository = new InvoiceRepositoryImpl(dsl);
+        InvoiceRequest request = ImmutableInvoiceRequest.builder()
+            .orderId(Integer.MAX_VALUE)
+            .build();
 
-        Assertions.assertNull(repository.findByOrderId(Integer.MAX_VALUE));
+        Optional<Invoice> result = repository.findByOrderId(request);
+
+        Assertions.assertFalse(result.isPresent());
     }
-
-    //TODO: findByOrderId Request object
-    //TODO: findByOrderId Optional return type
 }

@@ -6,6 +6,7 @@ import javax.transaction.Transactional;
 import org.jooq.DSLContext;
 import org.jooq.impl.DSL;
 
+import com.communitybagelco.invoice.entity.model.InvoiceRequest;
 import com.communitybagelco.invoice.model.ImmutableInvoice;
 import com.communitybagelco.invoice.model.ImmutableItem;
 import com.communitybagelco.invoice.model.Invoice;
@@ -13,6 +14,9 @@ import com.communitybagelco.invoice.model.Invoice;
 import lombok.RequiredArgsConstructor;
 
 import static org.jooq.generated.tables.Invoices.INVOICES;
+
+import java.util.Optional;
+
 import static org.jooq.generated.tables.InvoiceItems.INVOICE_ITEMS;
 
 @ApplicationScoped
@@ -23,7 +27,7 @@ public class InvoiceRepositoryImpl implements InvoiceRepository {
     private final DSLContext dsl;
 
     @Override
-    public Invoice findByOrderId(Integer orderId) {
+    public Optional<Invoice> findByOrderId(InvoiceRequest request) {
         
         return dsl.select(
                 INVOICES.ORDER_ID,
@@ -37,11 +41,11 @@ public class InvoiceRepositoryImpl implements InvoiceRepository {
                         INVOICE_ITEMS.TOTAL
                     )
                     .from(INVOICE_ITEMS)
-                    .where(INVOICE_ITEMS.ORDER_ID.eq(orderId))
+                    .where(INVOICE_ITEMS.ORDER_ID.eq(request.orderId()))
                 ).convertFrom(r -> r.into(ImmutableItem.class))
             )
             .from(INVOICES)
-            .where(INVOICES.ORDER_ID.eq(orderId))
-            .fetchOneInto(ImmutableInvoice.class);
+            .where(INVOICES.ORDER_ID.eq(request.orderId()))
+            .fetchOptionalInto(ImmutableInvoice.class);
     } 
 }
