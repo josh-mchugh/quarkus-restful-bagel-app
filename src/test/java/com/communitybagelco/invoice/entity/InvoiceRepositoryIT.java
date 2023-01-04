@@ -1,5 +1,8 @@
 package com.communitybagelco.invoice.entity;
 
-public class InvoiceRepositoryIT {
+import io.quarkus.test.junit.QuarkusIntegrationTest;
+
+@QuarkusIntegrationTest
+public class InvoiceRepositoryIT extends InvoiceRepositoryTest {
     
 }
