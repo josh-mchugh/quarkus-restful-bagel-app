@@ -7,6 +7,9 @@ import java.util.List;
 import org.junit.jupiter.api.Assertions;
 import org.junit.jupiter.api.Test;
 
+import nl.jqno.equalsverifier.EqualsVerifier;
+import nl.jqno.equalsverifier.Warning;
+
 public class InvoiceTest {
 
     @Test
@@ -154,6 +157,17 @@ public class InvoiceTest {
         Invoice invoice = createInvoice();
 
         Assertions.assertEquals(1869975707, invoice.hashCode());
+    }
+    
+    @Test
+    public void invoiceEqualsContract() {
+
+        EqualsVerifier.simple()
+            .forClass(ImmutableInvoice.class)
+            .suppress(Warning.BIGDECIMAL_EQUALITY)
+            .withNonnullFields("orderId", "timestamp", "total", "items")
+            .withResetCaches()
+            .verify(); 
     }
 
     private Invoice createInvoice() {
