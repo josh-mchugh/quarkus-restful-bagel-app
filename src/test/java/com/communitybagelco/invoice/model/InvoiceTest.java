@@ -170,6 +170,167 @@ public class InvoiceTest {
             .verify(); 
     }
 
+    @Test
+    public void whenItemHasProductIdThenExpectProductId() {
+
+        Invoice.Item item = ImmutableItem.builder()
+            .productId(1)
+            .productName("Product Name")
+            .quantity(1)
+            .total(BigDecimal.ZERO)
+            .build();
+
+        Assertions.assertEquals(1, item.productId());        
+    }
+
+    @Test
+    public void whenItemBuildDoesNotHaveProductIdThenExpectException() {
+
+        ImmutableItem.Builder builder = ImmutableItem.builder()
+            .productName("Product Name")
+            .quantity(1)
+            .total(BigDecimal.ZERO);
+    
+        Assertions.assertThrows(IllegalStateException.class, () -> builder.build());    
+    }
+
+    @Test
+    public void whenItemHasProductNameThenExpectProductName() {
+
+        Invoice.Item item = ImmutableItem.builder()
+            .productId(1)
+            .productName("Product Name")
+            .quantity(1)
+            .total(BigDecimal.ZERO)
+            .build();
+
+        Assertions.assertEquals("Product Name", item.productName());
+    }
+
+    @Test
+    public void whenItemBuilderDoesNotHaveProductNameThenExpectException() {
+
+        ImmutableItem.Builder builder = ImmutableItem.builder()
+            .productId(1)
+            .quantity(1)
+            .total(BigDecimal.ZERO);
+    
+        Assertions.assertThrows(IllegalStateException.class, () -> builder.build());   
+    }
+
+    @Test
+    public void whenItemHasQuantityThenExpectQuantity() {
+
+        Invoice.Item item = ImmutableItem.builder()
+            .productId(1)
+            .productName("Product Name")
+            .quantity(1)
+            .total(BigDecimal.ZERO)
+            .build();
+
+        Assertions.assertEquals(1, item.quantity());
+    }
+
+    @Test
+    public void whenItemBuilderDoesNotHaveQuantityThenExpectException() {
+
+        ImmutableItem.Builder builder = ImmutableItem.builder()
+            .productId(1)
+            .productName("Product Name")
+            .total(BigDecimal.ZERO);
+
+        Assertions.assertThrows(IllegalStateException.class, () -> builder.build());
+    }
+
+    @Test
+    public void whenItemHasTotalThenExpectTotal() {
+
+        Invoice.Item item = ImmutableItem.builder()
+            .productId(1)
+            .productName("Product Name")
+            .quantity(1)
+            .total(new BigDecimal("1"))
+            .build();
+
+        Assertions.assertEquals(new BigDecimal("1"), item.total());
+    }    
+
+    @Test
+    public void whenItemBuilderDoesNotHaveTotalThenExpectException() {
+
+        ImmutableItem.Builder builder = ImmutableItem.builder()
+            .productId(1)
+            .productName("Product Name")
+            .quantity(1);
+
+        Assertions.assertThrows(IllegalStateException.class, () -> builder.build());
+    }
+
+    @Test
+    public void whenItemToStringThenExpectValue() {
+
+        String expected = "Item{productId=1, productName=Product Name, quantity=1, total=1}";
+
+        Invoice.Item item = createItem();
+
+        Assertions.assertEquals(expected, item.toString());
+    }
+
+    @Test
+    public void whenItemHashCodeThenExpectValue() {
+
+        Invoice.Item item = createItem();
+
+        Assertions.assertEquals(1517225602, item.hashCode());
+    }
+
+    @Test
+    public void whenItemEqualsIsSameInstanceThenExpectTrue() {
+
+        Invoice.Item item1 = createItem();
+        Invoice.Item item2 = item1;
+
+        Assertions.assertTrue(item1.equals(item2));
+    }
+
+    @Test
+    public void whenItemEqualsIsDifferentTypeThenExpectFalse() {
+
+        Invoice.Item item = createItem();
+        Object object = new Object();
+
+        Assertions.assertFalse(item.equals(object));
+    }
+
+    @Test
+    public void whenItemEqualsIsEqualThenExpectTrue() {
+
+        Invoice.Item item1 = createItem(1);
+        Invoice.Item item2 = createItem(1);
+
+        Assertions.assertTrue(item1.equals(item2));
+    }
+
+    @Test
+    public void whenItemEqualsIsNotEqualThenExpectFalse() {
+
+        Invoice.Item item1 = createItem(1);
+        Invoice.Item item2 = createItem(2);
+
+        Assertions.assertFalse(item1.equals(item2));
+    }
+
+    @Test
+    public void invoiceItemEqualsContract() {
+
+        EqualsVerifier.simple()
+            .forClass(ImmutableItem.class)
+            .suppress(Warning.BIGDECIMAL_EQUALITY)
+            .withNonnullFields("productId", "productName", "quantity", "total")
+            .withResetCaches()
+            .verify();
+    }
+
     private Invoice createInvoice() {
 
         return createInvoice(1);
