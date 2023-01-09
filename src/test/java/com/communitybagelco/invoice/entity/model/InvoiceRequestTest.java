@@ -5,7 +5,7 @@ import org.junit.jupiter.api.Test;
 
 import nl.jqno.equalsverifier.EqualsVerifier;
 
-public class InvoiceRequsetTest {
+public class InvoiceRequestTest {
 
     @Test
     public void whenRequestHasOrderIdThenExpectOrderId() {
