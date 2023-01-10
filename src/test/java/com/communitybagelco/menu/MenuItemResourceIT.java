@@ -1,5 +1,8 @@
 package com.communitybagelco.menu;
 
-public class MenuItemResourceIT {
+import io.quarkus.test.junit.QuarkusIntegrationTest;
+
+@QuarkusIntegrationTest
+public class MenuItemResourceIT extends MenuItemResourceTest {
     
 }

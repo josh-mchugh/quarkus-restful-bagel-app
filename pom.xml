@@ -95,6 +95,12 @@
       <version>3.12.3</version>
       <scope>test</scope>
     </dependency>
+    <dependency>
+      <groupId>com.tngtech.archunit</groupId>
+      <artifactId>archunit-junit4</artifactId>
+      <version>1.0.1</version>
+      <scope>test</scope>
+    </dependency>
   </dependencies>
   <build>
     <plugins>
