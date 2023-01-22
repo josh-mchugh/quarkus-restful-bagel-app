@@ -16,8 +16,16 @@ When working on this project there was one goal: "Retrieve a list of bagels and 
 
 When I felt that it was complete, it went from a project with just a couple of APIs and POJOs to an application with several new frameworks I have not worked with and backing database model.
 
-## API
+## APIs
 
+GET - /api/menu
+- Retrieves a list of available products to order... probably all bagel related.
+
+POST - /api/order
+- Submits an order with products and quantity
+
+GET - /api/invoice/{id}
+- Retrieves a human readable overview of the order with totals for the entire order and per line item.
 
 ## Database Diagram
 
@@ -31,9 +39,7 @@ There are three views which prodide information for viewing and aggregatioin. Me
 
 ## Demostration
 
-This project uses Quarkus, the Supersonic Subatomic Java Framework.
 
-If you want to learn more about Quarkus, please visit its website: https://quarkus.io/ .
 
 ## Running the application in dev mode
 
