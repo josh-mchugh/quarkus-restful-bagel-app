@@ -16,8 +16,18 @@ When working on this project there was one goal: "Retrieve a list of bagels and 
 
 When I felt that it was complete, it went from a project with just a couple of APIs and POJOs to an application with several new frameworks I have not worked with and backing database model.
 
+## API
+
+
 ## Database Diagram
 
+The diagram below shows the structure of the database tables.
+
+There are three core tables for data which include product, orders, and order details. These tables content the data which represent the bagel shop. Products which can be used to order, and Orders which contains order information.
+
+There are three views which prodide information for viewing and aggregatioin. Menu is a view to display which products are available. Invoices agregates order information into a human readiable format with totals and product names.
+
+![Diagram of RESTful Bagel Shop Database](./images/database-diagram.png)
 
 ## Demostration
 
