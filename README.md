@@ -39,7 +39,17 @@ There are three views which prodide information for viewing and aggregatioin. Me
 
 ## Demostration
 
+Demostration of menu api - `/api/menu`
 
+![Demostration of menu api call](./images/rest-api-menu-example.gif)
+
+Demostration of order api - `/api/order`
+
+![Demostration of order api call](./images/rest-api-order-example.gif)
+
+Demostration of invoice api - `/api/invoice`
+
+![Demostration of invoice api call](./images/rest-api-invoice-example.gif)
 
 ## Running the application in dev mode
 
