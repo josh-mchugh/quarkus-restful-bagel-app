@@ -9,7 +9,7 @@ import com.communitybagelco.menu.repository.MenuItemRepository;
 
 import lombok.RequiredArgsConstructor;
 
-@Path("/menu")
+@Path("/api/menu")
 @ApplicationScoped
 @RequiredArgsConstructor
 public class MenuItemResource {

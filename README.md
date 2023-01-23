@@ -10,7 +10,7 @@ Additional frameworks to learn:
 - EqualsVerifier - Equals and hashCode test framework
 - ArchUnit - Java architecture test framework
 
-## Object and Appraoch
+## Objective and Appraoch
 
 When working on this project there was one goal: "Retrieve a list of bagels and make a simple sale, like a bagel shop". The approach to get there was to do the smallest and simplest goal first. After that is was like a painting. I kept adding little functionality on top of additional functionality with little commits every day.
 
@@ -39,7 +39,17 @@ There are three views which prodide information for viewing and aggregatioin. Me
 
 ## Demostration
 
+Demostration of menu api - `/api/menu`
 
+![Demostration of menu api call](./images/rest-api-menu-example.gif)
+
+Demostration of order api - `/api/order`
+
+![Demostration of order api call](./images/rest-api-order-example.gif)
+
+Demostration of invoice api - `/api/invoice`
+
+![Demostration of invoice api call](./images/rest-api-invoice-example.gif)
 
 ## Running the application in dev mode
 
