@@ -36,18 +36,8 @@ public class OrderResource {
             return Response.status(Status.BAD_REQUEST).build();
         }
 
-        // TODO : Clean up
-        List<OrderRequest.Item> items  = body.getItems().stream()
-            .map (item ->  {
-                return ImmutableItem.builder()
-                    .productId(item.getProductId())
-                    .quantity(item.getQuantity())
-                    .build();
-            })
-            .collect(Collectors.toList());
-
         OrderRequest request = ImmutableOrderRequest.builder()
-            .items(items)
+            .items(createItems(body))
             .build();
 
         OrderResponse response = orderService.createOrder(request);
@@ -55,5 +45,20 @@ public class OrderResource {
         URI uri = UriBuilder.fromPath(String.format("/api/invoice/%s", response.orderId())).build();
 
         return Response.created(uri).build();
+    }
+
+    private List<OrderRequest.Item> createItems(OrderBody body) {
+
+        return body.getItems().stream()
+            .map(this::createItem)
+            .collect(Collectors.toList());
+    }
+
+    private OrderRequest.Item createItem(OrderBody.Item item) {
+
+        return ImmutableItem.builder()
+                    .productId(item.getProductId())
+                    .quantity(item.getQuantity())
+                    .build();
     }
 }
