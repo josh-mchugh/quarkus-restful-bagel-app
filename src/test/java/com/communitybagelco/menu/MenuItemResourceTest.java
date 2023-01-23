@@ -17,7 +17,7 @@ public class MenuItemResourceTest {
 
         given()
             .when()
-                .get("/menu")
+                .get("/api/menu")
             .then()
                 .statusCode(Response.Status.OK.getStatusCode());
     }
@@ -27,7 +27,7 @@ public class MenuItemResourceTest {
 
         given()
             .when()
-                .get("/menu")
+                .get("/api/menu")
             .then()
                 .body("[0].productId", is(1))
                 .body("[0].name", is("Plain"))
