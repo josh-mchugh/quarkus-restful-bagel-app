@@ -10,7 +10,7 @@ Additional frameworks to learn:
 - EqualsVerifier - Equals and hashCode test framework
 - ArchUnit - Java architecture test framework
 
-## Objective and Appraoch
+## Objective and Approach
 
 When working on this project there was one goal: "Retrieve a list of bagels and make a simple sale, like a bagel shop". The approach to get there was to do the smallest and simplest goal first. After that is was like a painting. I kept adding little functionality on top of additional functionality with little commits every day.
 
