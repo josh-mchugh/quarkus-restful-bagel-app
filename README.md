@@ -1,3 +1,5 @@
+![example workflow](https://github.com/josh-mchugh/quarkus-restful-bagel-app/actions/workflows/main.yml/badge.svg)
+
 # Quarkus RESTful Bagel App
 
 This is a project to put together all the knowledge I read from Understanding Quarkus. It was original going to be a small and simple RESTful API which only returned static data hile using an in memory List as a pseudo database. It slowly evolved into learning a few other frameworks at the same time.
