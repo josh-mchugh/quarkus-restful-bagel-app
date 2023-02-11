@@ -1,4 +1,5 @@
 ![example workflow](https://github.com/josh-mchugh/quarkus-restful-bagel-app/actions/workflows/main.yml/badge.svg)
+[![codecov](https://codecov.io/gh/josh-mchugh/quarkus-restful-bagel-app/branch/main/graph/badge.svg?token=0DDOQZ18BM)](https://codecov.io/gh/josh-mchugh/quarkus-restful-bagel-app)
 
 # Quarkus RESTful Bagel App
 
